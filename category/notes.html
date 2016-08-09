@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard &ndash; Category: Notes</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/notes-about-keras-deeplearning-framework.html#notes-about-keras-deeplearning-framework">Notes about Keras deeplearning framework</a></h1>
+    <p>
+      Posted on Mon 27 June 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <h1>Short introduction to Keras</h1>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Tp3SaRbql4k">https://www.youtube.com/watch?v=Tp3SaRbql4k</a></li>
+</ul>
+<h3>Keras can be thought of as 4 steps</h3>
+<ul>
+<li>Prepare input and output tensors</li>
+<li>Create first layer (input)</li>
+<li>Create output layer </li>
+<li>Build any model inbetween</li>
+</ul>
+<h1>Everything is a layer!</h1>
+<p>Layers are minimally defined as output dimensions (input dimensions are optional, typically only required for first layer)</p>
+<p><code>return_sequence</code>, if true output can be feeded to another RNN</p>
+<p>map to a sequence</p>
+<p>if false, feed to fully connected layers</p>
+<p>even <code>dropout</code> is a layer. Makes sense, as dropout can be seen as a</p>
+<p>random matrix that will multiply inputs with 1 or 0</p>
+<h1>models</h1>
+<p>instantiate a model:</p>
+<div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Expand a model</p>
+<div class="highlight"><pre><span></span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="n">layer</span> <span class="nb">type</span><span class="p">])</span>
+</pre></div>
+
+
+<p>Check a model</p>
+<div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+
+<h2>Neural Net is implemented as a model</h2>
+<ul>
+<li>Layers are all contained within a model</li>
+</ul>
+<h3>Sequential model</h3>
+<ul>
+<li>Regular run-of-the-mill NN</li>
+<li>setup input and output layer</li>
+<li>one layer feeds into the next</li>
+</ul>
+<h3>Graph</h3>
+<ul>
+<li>One layer can split into several layers</li>
+</ul>
+<p><code>model.Compile()</code> sets up your model, which loss-function and optimizer that will be used. This will compile the model into machine code via Theano or TensorFlow.</p>
+<p><code>model.fit()</code> is the training function.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/hiragana-katakana-transliteration-in-4-lines-of-python.html#hiragana-katakana-transliteration-in-4-lines-of-python">'Hiragana <-> katakana transliteration in 4 lines of Python'</a></h1>
+    <p>
+      Posted on Thu 26 May 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>This is a quick script to make good hiragana &lt;-&gt; katakana conversion in just 4 lines of Python.</p>
+<p>This code will make it easy to convert <code>かたかな</code> to <code>カタカナ</code> and <code>ヒラガナ</code> to <code>ひらがな</code> without any dependencies. It even handles mixed script correctly.</p>
+<p>If you don't need romaji translitteration and want to lower your scripts dependencies you can forgo pip installing some surprisingly large libraries just to convert from hiraganan to katakana and simply copy paste the below 4 lines (and preferrably a link to my homepage or github) and you are good to go.</p>
+<p>Tested in Python 3.x, doesn't seem to work in Python 2.7</p>
+<p>Download it off my github <a href="https://github.com/olsgaard/Japanese_nlp_scripts/blob/master/hiragana_katakana_translitteration.py">here</a></p>
+<h1>How it works</h1>
+<p>I use the builtin string function <code>translate</code> which converts characters to corrosponding characters in a translations table, easily created with another string function, <code>maketrans</code>. <a href="https://docs.python.org/3/library/stdtypes.html#str.translate">See documentation here</a></p>
+<p>We simply create our hiragana and katakana translation tables and use the <code>str.translate()</code> function to do the heavy lifting.</p>
+<p>I've used <a href="http://www.localizingjapan.com/blog/2012/01/20/regular-expressions-for-japanese-text/">Mark Rogoyski</a> list of hiragana and katakana unicode codepoints and removed characters I don't want transliterated. For example, I want to be able to convert コーヒ to hiragana and back. If I had naively used the table, then <code>ー</code> would be converted into <code>゜</code>, which wouldn't make any sense.</p>
+<p>The magic happens in these 4 lines of code:</p>
+<div class="highlight"><pre><span></span><span class="n">katakana_chart</span> <span class="o">=</span> <span class="s2">&quot;ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶヽヾ&quot;</span>
+<span class="n">hiragana_chart</span> <span class="o">=</span> <span class="s2">&quot;ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんゔゕゖゝゞ&quot;</span> 
+<span class="n">hir2kat</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="n">hiragana_chart</span><span class="p">,</span> <span class="n">katakana_chart</span><span class="p">)</span>
+<span class="n">kat2hir</span>  <span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="n">katakana_chart</span><span class="p">,</span> <span class="n">hiragana_chart</span><span class="p">)</span>
+</pre></div>
+
+
+<p>And it is used like so:</p>
+<div class="highlight"><pre><span></span><span class="n">mixed</span> <span class="o">=</span> <span class="s1">&#39;きゃりーぱみゅぱみゅは日本の歌手です。&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mixed</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">hir2kat</span><span class="p">))</span>
+<span class="c1"># out: キャリーパミュパミュハ日本ノ歌手デス。</span>
+
+<span class="c1"># transliterate back and forth</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mixed</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">hir2kat</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">kat2hir</span><span class="p">))</span>
+<span class="c1"># out: きゃりーぱみゅぱみゅは日本の歌手です。</span>
+</pre></div>
+
+
+<p>Notice how kanji and special characters are left alone.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/pycnn-install-notes-for-osx-but-also-in-general.html#pycnn-install-notes-for-osx-but-also-in-general">PyCNN install notes (for OSX, but also in general)</a></h1>
+    <p>
+      Posted on Tue 19 April 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>The guide available at <a href="https://github.com/clab/cnn/blob/master/INSTALL.md">https://github.com/clab/cnn/blob/master/INSTALL.md</a> will mostly get you through installing PyCNN with CNN and Eigen (necessary for CNN)</p>
+<p>Here's a few notes</p>
+<ul>
+<li>The PyCNN install guide recommends latest stable version of Eigen, the README file for CNN recommends latest development build. You might have to try both. Either can be installed from <a href="http://eigen.tuxfamily.org/">http://eigen.tuxfamily.org/</a> (just unzip and move to <code>cnn</code> folder and rename to <code>eigen</code> and you don't have to mess with mercury/hg)</li>
+<li>The PyCNN install guide hints that you should use python 2.x. This is not a hint <strong>Python 2.7 is required</strong> for PyCNN</li>
+<li>
+<p>You can add extra compiler flags in <code>setup.py</code>. On OSX you may need to include the following <code>extra_compile_args</code>(remember the trailing comma. These are function arguments!): 
+    [&#8216;-mmacosx-version-min=10.7&#8242;,'-std=c++11&#8242;,'-stdlib=libc++'],</p>
+</li>
+<li>
+<p>You might need to do things several times. Be patient and be stubborn!</p>
+</li>
+</ul>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/fix-valueerror-unknown-locale-utf-8-under-mac-os-x.html#fix-valueerror-unknown-locale-utf-8-under-mac-os-x">Fix "ValueError: unknown locale: UTF-8" under Mac OS X'</a></h1>
+    <p>
+      Posted on Mon 04 April 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>This is a problem I've been having after switching from OSX' default bash to oh-my-zsh.</p>
+<p>When importing things like <code>matplotlib</code> in Python I get the following error:</p>
+<div class="highlight"><pre><span></span><span class="n">ValueError</span><span class="o">:</span> <span class="n">unknown</span> <span class="n">locale</span><span class="o">:</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+</pre></div>
+
+
+<p>The problem is that the locale has not been set and UTF-8 is not a valid locale, as it is only an encoding.</p>
+<p>In bash or zsh run</p>
+<div class="highlight"><pre><span></span>$ locale
+</pre></div>
+
+
+<p>if it looks like</p>
+<div class="highlight"><pre><span></span><span class="nv">LANG</span><span class="o">=</span>
+<span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_MONETARY</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_TIME</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_ALL</span><span class="o">=</span>
+</pre></div>
+
+
+<p>You are in trouble. You want it to look something like the following if you are using US locale</p>
+<div class="highlight"><pre><span></span><span class="nv">LANG</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_MONETARY</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_TIME</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_ALL</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+</pre></div>
+
+
+<p>If you browse around the web for a solution you will be told to add</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+<span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+</pre></div>
+
+
+<p>To all sorts of places. <code>~/.bash</code>, <code>~/.profile</code>, <code>/etc/.profile</code> and the list goes on. If you are running oh-my-zsh you need to edit <code>~/.zshrc</code> and add the above two lines and restart you terminal and python as well.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/installing-tensorflow-in-python-35-with-anaconda.html#installing-tensorflow-in-python-35-with-anaconda">Installing Tensorflow in Python 3.5 with Anaconda</a></h1>
+    <p>
+      Posted on Fri 29 January 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>Since the release of Tensorflow 0.6, support for Python 3.3+ has finally been added.</p>
+<p>However, if you are trying to install Tensorflow into an Anaconda install with <code>conda</code> you might just be using this command that is floating around the web:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Old tensorflow version</span>
+$ conda install -c https://conda.anaconda.org/jjhelmus tensorflow
+</pre></div>
+
+
+<p>However, this is a packaged version of Tensorflow 0.5, and <strong>won't run on Python 3.3+</strong></p>
+<p>Instead you can install via pip into your Anaconda installation. Activate the environment you want to install into, or just install into root, and then use the following commands:</p>
+<div class="highlight"><pre><span></span>$ sudo easy_install --upgrade six
+$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.0-py3-none-any.whl
+</pre></div>
+
+
+<p>In the official documentation [1] they link to <em>...tensorflow-0.<strong>5</strong>.0-py<strong>2</strong>-none-any.whl</em>, which is an older version of tensorflow for python 2.x. At the time of writing the newest version is 0.7, so I just manually updated the numbers in the URL to fetch and install the version I want.</p>
+<p>On OSX El Capitan, with Anaconda 2.5 the above <em>does</em> throw an exception, but the exception happens late enough in the install script that tensoflow will be installed once done. I suppose this is part of working with pre-1.0 release software.</p>
+<p>Before installing tensorflow, consider updating your anaconda installation, by running</p>
+<div class="highlight"><pre><span></span>$ conda update anaconda
+</pre></div>
+
+
+<p>[1] <a href="https://www.tensorflow.org/versions/0.6.0/get_started/os_setup.html#pip_install">https://www.tensorflow.org/versions/0.6.0/get_started/os_setup.html#pip_install</a></p>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn" href="/category/notes2.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

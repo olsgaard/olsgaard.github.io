@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="When measuring the effectiveness of a Voice Activity Detection algorithm (VAD) looking at 0-1 accuracy is rarely enough. We typically also look at Nonspeech Hit Rate (HR0) and Speech Hit Rate (HR1). HR0 is computed as the ratio of the number of correctly detected nonspeech frames to the number of ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Measuring succes of Voice Activity Detection algorithms. HR0 and HR1"/>
+<meta property="og:description" content="When measuring the effectiveness of a Voice Activity Detection algorithm (VAD) looking at 0-1 accuracy is rarely enough. We typically also look at Nonspeech Hit Rate (HR0) and Speech Hit Rate (HR1). HR0 is computed as the ratio of the number of correctly detected nonspeech frames to the number of ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/measuring-succes-of-voice-activity-detection-algorithms-hr0-and-hr1.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-02-06 13:02:34+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Measuring succes of Voice Activity Detection algorithms. HR0 and HR1</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="measuring-succes-of-voice-activity-detection-algorithms-hr0-and-hr1">Measuring succes of Voice Activity Detection algorithms. HR0 and HR1</h1>
+    <p>Posted on Fri 06 February 2015 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>When measuring the effectiveness of a Voice Activity Detection algorithm (<a href="https://en.wikipedia.org/wiki/Voice_activity_detection" title="Voice Activity Detection on Wikipedia">VAD</a>) looking at 0-1 accuracy is rarely enough. We typically also look at <em>Nonspeech Hit Rate</em> (HR0) and <em>Speech Hit Rate</em> (HR1).</p>
+<ol>
+<li><strong>HR0</strong> is computed as the ratio of the number of correctly detected nonspeech frames to the number of real nonspeech frames.</li>
+<li><strong>HR1</strong> is computed as the ratio of the number of correctly detected speech frames to the number of real speech frames.</li>
+</ol>
+<p style="text-align: right;">
+  <em>Park et al. 2014 [1]</em>
+</p>
+
+<p>Another way to put it is _the percentage of nonspeech and speech frames that are correctly predicted. In Python, this can be calculated in the following way:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">our</span><span class="o">-</span><span class="n">vad</span><span class="o">-</span><span class="n">library</span> <span class="k">as</span> <span class="n">VAD</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">load_targets</span><span class="p">()</span>
+
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Find nonspeech and speech hit rates:</span>
+<span class="n">index0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">index1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">hr0</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_hat</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">hr1</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_hat</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index1</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+
+<p>First we create 2 indexes of y using numpy's <code>where()</code> function (<a title="numpy.where — NumPy v1.9 Manual:" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html">see more</a>). <code>index0</code> is a vector of all the positions of y that represents a silent frame in our data. Say <code>y = [0,0,0,1,1,0]</code>, then <code>index0 = [0,1,2,5]</code>, since <code>y[0] = y[1] = y[2] = y[5] = 0.</code></p>
+<p>this means that</p>
+<div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> 
+<span class="c1"># -&gt; [0,0,0,0]</span>
+</pre></div>
+
+
+<p>Which in and of itself is not interesting. However, we can use the same index to pull out all the predictions in ŷ and compare them to the ground-truth in y</p>
+<div class="highlight"><pre><span></span><span class="n">y_hat</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span>
+<span class="c1"># -&gt; (True, True, False ... , dtype=bool)</span>
+</pre></div>
+
+
+<p>This gives us a new array of the same dimensions with boolean <code>True</code> or <code>False</code> values. Each <code>True</code> represents a correct prediction and each <code>False</code> an incorrect. A neat python trick is that boolean values are treated as 0 and 1, so we can take the mean of this boolean result array to get the ratio between correct and incorrect prediction using the <code>.mean()</code> function.</p>
+<hr />
+<p>[1] Park, Jinsoo, Wooil Kim, David K. Han, and Hanseok Ko. “Voice Activity Detection in Noisy Environments Based on Double-Combined Fourier Transform and Line Fitting.” <em>The Scientific World Journal</em> 2014 (August 6, 2014): e146040. doi:10.1155/2014/146040.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Measuring succes of Voice Activity Detection algorithms. HR0 and HR1",
+  "headline": "Measuring succes of Voice Activity Detection algorithms. HR0 and HR1",
+  "datePublished": "2015-02-06 13:02:34+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/measuring-succes-of-voice-activity-detection-algorithms-hr0-and-hr1.html",
+  "description": "When measuring the effectiveness of a Voice Activity Detection algorithm (VAD) looking at 0-1 accuracy is rarely enough. We typically also look at Nonspeech Hit Rate (HR0) and Speech Hit Rate (HR1). HR0 is computed as the ratio of the number of correctly detected nonspeech frames to the number of ..."
+}
+</script></body>
+</html>

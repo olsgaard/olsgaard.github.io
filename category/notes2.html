@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard &ndash; Category: Notes</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/getting-several-python-kernels-into-jupyteripython-notebook-using-anaconda.html#getting-several-python-kernels-into-jupyteripython-notebook-using-anaconda">Getting several python kernels into JuPyter/IPython notebook using Anaconda</a></h1>
+    <p>
+      Posted on Fri 29 January 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p><img alt="" src="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-29-at-16.46.50.png" /></p>
+<p>To get Jupyter notebooks to use several different Python kernels using Anaconda, so the following from the commandline:</p>
+<div class="highlight"><pre><span></span>$ conda create -n py27 anaconda <span class="nv">python</span><span class="o">=</span>2.7 
+$ <span class="nb">source</span> activate py27 
+$ conda install notebook ipykernel
+$ ipython kernel install
+</pre></div>
+
+
+<p>In the first line, the <code>-n py27</code> sets the name of the new environment we <code>create</code> to <code>py27</code>. This is a handy name for a Python 2.7 environment. <code>anaconda</code> denotes the packages we want installed. The <code>anaconda</code> package contains all the scientific packages you'd expect (numpy, scipy, matplolib, sklearn, etc.) <code>python=2.7</code> tells conda to create the environment with python version 2.7</p>
+<p>The second line switches you to the new virtual environment.</p>
+<p>Third and fourth line installs the kernel into IPython notebook.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/notes-on-kyoto-corpus-installation-and-format.html#notes-on-kyoto-corpus-installation-and-format">Notes on Kyoto Corpus installation and format</a></h1>
+    <p>
+      Posted on Thu 21 January 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <h2>Installation</h2>
+<ul>
+<li>unzip <code>KyotoCorpus4.0.tar.gz</code> (<a href="http://nlp.ist.i.kyoto-u.ac.jp/EN/index.php?Kyoto%20University%20Text%20Corpus">available here</a>)</li>
+<li>If you do not have a CD-drive, copy the <code>mai95.txt</code> from the Mainichi Shinbun 1995 CD-ROM to the <code>KyotoCorpus4.0</code> library you just unzipped (USB stick from friend who has an old PC ...)</li>
+<li>If you have a CD-drive, the install script should find the file automatically from your drive.</li>
+<li>Run <code>./auto_conv -d .</code> to run the install script and have it look for <code>mai95.txt</code> in the same directory.</li>
+<li>When installing with CD, just run <code>./auto_conv</code></li>
+<li><a href="http://miz-log.blogspot.dk/2011/11/on-lion.html">On windows you can install Kyoto Corpus via cygwin</a></li>
+</ul>
+<p>The install script relies heavily on Perl's <a href="http://perldoc.perl.org/encoding.html#WARNING"><code>encode</code></a> function, which is deprecated. Expect lots of warnings! The script will probably not run on Perl 6, and only versions of Perl newer than 5.8 (5.18, on OSX 10.11 works fine!)</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/convert-encoding-for-multiple-files-recursively.html#convert-encoding-for-multiple-files-recursively">Convert encoding for multiple files recursively</a></h1>
+    <p>
+      Posted on Thu 14 January 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>If you have a large corpus of text files in, say euc-jp encoding, they can be quite difficult to work with, since most command-line tools on modern systems expects utf-8 files.</p>
+<p>iconv can be used to convert file encodings from one known encoding to another. One problem on OSX is that the -o option doesn't work and instead you have to use the <em>redirect operator</em> <code>&gt;</code>. Moreover you can't do this to overwrite an existing file, so if you have a large, complex directory structure you need to traverse recursively to change the encoding of each file, it becomes problematic.</p>
+<p>I've found the following to work very well:</p>
+<div class="highlight"><pre><span></span>find . -type f -exec sh -c <span class="s2">&quot;iconv -f eucjp -t UTF-8 {} &gt; {}.utf8&quot;</span>  <span class="se">\;</span> -exec mv <span class="s2">&quot;{}&quot;</span>.utf8 <span class="s2">&quot;{}&quot;</span> <span class="se">\;</span>
+</pre></div>
+
+
+<ul>
+<li><code>find</code> finds all files and directories recursively</li>
+<li><code>.</code> denotes starting directory. In this case, the current directory and thus everything below as well.</li>
+<li><code>-type f</code> limits the search to files only (so no directories will be returned)</li>
+<li><code>-exec</code> executes a command for each search result</li>
+<li><code>sh -c</code> opens bash shell, and executes the string followin -c</li>
+<li><code>iconv -f eucjp -t UTF-8</code> converts encoding -f(rom) euc-jp to utf-8</li>
+<li><code>{}</code> denotes the search result (filename)</li>
+<li><code>&gt;</code> the redirect operator. We run this line via the shell to get this to work, since it doesn't work if run directly via the -exec command (what a mess!)</li>
+<li><code>{}.utf8</code> save to a file with &#8220;utf8&#8221; as the extension</li>
+<li><code>"  \;</code> close the bash command and close the -exec command.</li>
+<li><code>-exec</code> do another command with the search result</li>
+<li><code>mv "{}".utf8 "{}"</code> move the new file to the old filename, thus overwriting the original file</li>
+<li><code>\;</code> close the second -exec command.</li>
+</ul>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/running-jupyther-notebook-with-connected-qt-console-and-styles.html#running-jupyther-notebook-with-connected-qt-console-and-styles">Running JuPyther notebook with connected qt console and styles</a></h1>
+    <p>
+      Posted on Tue 12 January 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>When developing a project in JuPyther/Ipython notebook it is often nice to run some test code in a console, especially if you want to check the content of a variable that might have thousands of items &#8211; something that might choke your notebook.</p>
+<p>Open your notebook as you'd normally do via a terminal:</p>
+<div class="highlight"><pre><span></span>$ ipython notebook
+</pre></div>
+
+
+<p>In a new terminal window, open a connected qtconsole:</p>
+<div class="highlight"><pre><span></span>$ ipython qtconsole --existing
+</pre></div>
+
+
+<p>Since the default color scheme isn't very nice, I usually choose a style, such as <em>monokai</em></p>
+<div class="highlight"><pre><span></span>$ ipython qtconsole --existing --style<span class="o">=</span>monokai
+</pre></div>
+
+
+<p>By doing this, you can share code between the notebook and the console, as well as draw graphs in both. This is nice for checking the result of a line of code or running a script that prints thousands of lines.</p>
+<p><a href="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49.png" rel="attachment wp-att-208"><img class="aligncenter wp-image-208 size-large" src="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-1024x476.png" alt="qtconsole connected to notebook" width="660" height="307" srcset="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-1024x476.png 1024w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-300x140.png 300w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-768x357.png 768w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49.png 1150w" sizes="(max-width: 660px) 100vw, 660px" /></a></p>
+<p>For a list of styles, run the following code in python:</p>
+<pre>In [1]: from pygments.styles import STYLE_MAP
+In [2]: print (STYLE_MAP.keys())
+Out [2]: dict_keys(['rrt', 'perldoc', 'monokai', 'friendly', 'borland', 'native', 'xcode', 'colorful', 'fruity', 'manni', 'paraiso-light', 'vs', 'emacs', 'bw', 'default', 'murphy', 'igor', 'paraiso-dark', 'trac', 'tango', 'pastie', 'vim', 'autumn'])</pre>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/installing-mecab-on-osx.html#installing-mecab-on-osx">Installing MeCab on OSX</a></h1>
+    <p>
+      Posted on Thu 08 October 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>In the <a href="http://taku910.github.io/mecab/">In the</a> there are only instruction on how to install on Windows and Linux, but not for OSX, despite the program working quite nicely on Mac.</p>
+<p>Kousei Ikeda has easy to follow instruction on his <a href="http://ikekou.jp/blog/archives/2736">Ikekou blog</a> reprinted here in English.</p>
+<h2>MeCab</h2>
+<p>We install from the Terminal, using the following commands:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/Downloads
+$ curl -O https://mecab.googlecode.com/files/mecab-0.996.tar.gz
+$ tar zxfv mecab-0.996.tar.gz
+$ <span class="nb">cd</span> mecab-0.996
+$ ./configure
+$ make
+$ make check
+</pre></div>
+
+
+<p>This downloads the source from Google Code, unpacks it and compile and check compilation.</p>
+<h2>IPADIC</h2>
+<p>Next we need to install a dictionary file / language model for MeCab. The recommended model is IPADIC.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/Downloads
+$ $ curl -O https://mecab.googlecode.com/files/mecab-ipadic-2.7.0-20070801.tar.gz
+$ tar zxfv mecab-ipadic-2.7.0-20070801.tar.gz
+$ <span class="nb">cd</span> mecab-ipadic-2.7.0-20070801
+$ ./configure --with-charset<span class="o">=</span>utf8
+$ make
+$ sudo make install
+</pre></div>
+
+
+<p>This downloads the source code, unpacks it and compiles the dictionary using UTF-8 character encoding.</p>
+<p>Note that the above code downloads from googlecode.com, which is deprecated. The project is inaccessible from Google code and is currently hosted on Github (<a href="https://github.com/taku910/mecab">here</a>) so it is uncertain how long the zipped source will be available there.</p>
+<p>Check the <a href="http://taku910.github.io/mecab/#download">download section of the documentation</a> for links to the currently newest version of both IPADIC and MeCab.</p>
+<p>After this is done you can use pip to install MeCab bindings for python like this:</p>
+<div class="highlight"><pre><span></span>$ pip install mecab-python3
+</pre></div>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn" href="/category/notes3.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
+    <a class="btn float-right" href="/category/notes.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

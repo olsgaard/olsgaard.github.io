@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="TL;DR: Install Japanese language support and insert the following in your python script import matplotlib matplotlib.rc('font', family='TakaoPGothic') If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Showing Japanese characters in Matplotlib on Ubuntu"/>
+<meta property="og:description" content="TL;DR: Install Japanese language support and insert the following in your python script import matplotlib matplotlib.rc('font', family='TakaoPGothic') If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/showing-japanese-characters-in-matplotlib-on-ubuntu.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2014-10-27 04:51:33+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Showing Japanese characters in Matplotlib on Ubuntu</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="showing-japanese-characters-in-matplotlib-on-ubuntu">Showing Japanese characters in Matplotlib on Ubuntu</h1>
+    <p>Posted on Mon 27 October 2014 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>TL;DR: <em>Install Japanese language support and insert the following in your python script</em></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;TakaoPGothic&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<hr />
+<p>If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs that in one way or another includes Japanese characters.</p>
+<p>Below is a graph showing Zipf's Law for the distribution of characters used in [TL;DR: <em>Install Japanese language support and insert the following in your python script</em></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;TakaoPGothic&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<hr />
+<p>If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs that in one way or another includes Japanese characters.</p>
+<p>Below is a graph showing Zipf's Law for the distribution of characters used in](http://en.wikipedia.org/wiki/Tetsuko_Kuroyanagi) &#8216;Totto Channel', the sequel to her famous <a href="en.wikipedia.org/wiki/Totto-Chan:_The_Little_Girl_at_the_Window">&#8220;Totto Chan: The little girl by the window&#8221;</a>.<figure id="attachment_68" style="width: 300px" class="wp-caption aligncenter"></p>
+<p><img alt="" src="assets/2014/10/tottochannel_nojap-300x225.png" /></p>
+<p>Character Distribution of 100 most used characters - but which ones?</figcaption></p>
+<p>On most systems, Matplotlib will not be able to display Japanese characters out-of-the-box and this is a big problem as the graph above is completely useless for even the most basic investigation.</p>
+<p>I've tested on OSX, Windows 8 and Ubuntu and only OSX manages to work out of the box, despite my Windows installation being Japanese!</p>
+<p><a href="http://stackoverflow.com/questions/10960463/non-ascii-characters-in-matplotlib">Most</a> <a href="http://stackoverflow.com/questions/2406700/accented-characters-in-matplotlib">advice</a> online will tell you to change the font used by Matplotlib, but if you are on Ubuntu it might not be completely obvious which font you need to use! Moreover there are many ways to change the font.</p>
+<p>I've found the simplest way of changing fonts to simply be using <a href="http://matplotlib.org/users/customizing.html#dynamic-rc-settings">matplotlib.rc</a></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;Monospace&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>In family you can either insert the name of a font family (as in the above example) or you can name a specific font, which is what you want to do in this case. But which one? I wrote the following script to help check which fonts will work.</p>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Matplotlib font checker</span>
+<span class="sd">Prints a figure displaying a variety of system fonts and their ability to produce Japanese text</span>
+
+<span class="sd">@author: Mads Olsgaard, 2014</span>
+
+<span class="sd">Released under BSD License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
+
+<span class="n">fonts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Droid Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Vera&#39;</span><span class="p">,</span> <span class="s1">&#39;TakaoGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;TakaoPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Liberation Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span> <span class="s1">&#39;FreeSans&#39;</span><span class="p">,</span> <span class="s1">&#39;Droid Sans Japanese&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">]</span>
+<span class="c1">#fonts = [&#39;Arial&#39;, &#39;Times New Roman&#39;, &#39;Helvetica&#39;] #uncomment this line on Windows and see if it helps!</span>
+<span class="n">english</span> <span class="o">=</span> <span class="s1">&#39;The quick ...&#39;</span>
+<span class="n">japanese</span> <span class="o">=</span> <span class="s1">&#39;日本語&#39;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Buils headline</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;japanese&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s1">&#39;Font name&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">-=</span><span class="mf">0.1</span>
+
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fonts</span><span class="p">:</span>
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">english</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">japanese</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">-=</span> <span class="mf">0.1</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">findfont</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>  <span class="c1"># Sanity check. Prints the location of the font. If the font it not found, an error message is printed and the location of the fallback font is shown</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p>On ubuntu the output should be the following:</p>
+<pre>Droid Sans /usr/share/fonts/truetype/droid/DroidSans.ttf
+Vera /home/supermads/anaconda3/lib/python3.4/site-packages/matplotlib/mpl-data/fonts/ttf/Vera.ttf
+TakaoGothic /usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf
+TakaoPGothic /usr/share/fonts/truetype/takao-gothic/TakaoPGothic.ttf
+Liberation Sans /usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf
+ubuntu /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf
+FreeSans /usr/share/fonts/truetype/freefont/FreeSans.ttf
+Droid Sans Japanese /usr/share/fonts/truetype/droid/DroidSansJapanese.ttf
+DejaVu Sans /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+</pre>
+
+<p>As you can see, I'm running Anaconda Python 3, and if Anaconda can't find a font it will fallback into it's own folder to load the Vera font.</p>
+<p><img alt="" src="assets/2014/10/fontcheck.png" /></p>
+<p>Surprisingly, Droid does support Japanese, it just saves the Japanese character space in a seperate font file, rendering it useless for this purpose. However, the Takao font family does work for our purpose.</p>
+<p>Takao fonts should be installed by default if you have set your location somewhere in Japan during installation of Ubuntu or if you have installed support for Japanese language in <em>System Settings</em> → <em>Language Support</em> (just hit the super key and search for language). I recommend this, since this will also <a href="http://moritzmolch.com/1453">install the Japanese input method</a>, <a href="http://en.wikipedia.org/wiki/Anthy">Anthy</a></p>
+<p>You can also use apt-get, like this from the command line (not tested):</p>
+<pre>sudo apt-get install fonts-takao-mincho fonts-takao-gothic fonts-takao-pgothic
+</pre>
+
+<p>And now we can finally see which characters Kuronayagi used the most for her sequel:</p>
+<p><img alt="" src="assets/2014/10/tottochannel_wjap-1024x348.png" /></p>
+<p>And apparently, that's the Japanese comma, also called <a href="http://ja.wikipedia.org/wiki/%E8%AA%AD%E7%82%B9">読点</a></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Showing Japanese characters in Matplotlib on Ubuntu",
+  "headline": "Showing Japanese characters in Matplotlib on Ubuntu",
+  "datePublished": "2014-10-27 04:51:33+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/showing-japanese-characters-in-matplotlib-on-ubuntu.html",
+  "description": "TL;DR: Install Japanese language support and insert the following in your python script import matplotlib matplotlib.rc('font', family='TakaoPGothic') If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs ..."
+}
+</script></body>
+</html>

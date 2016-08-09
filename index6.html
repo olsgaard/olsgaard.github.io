@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/linear-seperator-perceptron-svm.html#linear-seperator-perceptron-svm">Linear seperator, Perceptron, SVM</a></h1>
+    <p>
+      Posted on Thu 13 February 2014 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p><img alt="" src="assets/2014/02/Linear_sep-300x238.png" /></p>
+<p>A Linear seperator is an algorithm that seperates two dataset via a straight line.</p>
+<ul>
+<li>A <strong>Perceptron</strong> is a linear seperator that seperates at the first line it finds.</li>
+<li>An <strong>SVM</strong> (Support Vector Machine) seperates at the "best" line - e.g. with the largest distance to every point (the black line)</li>
+</ul>
+<p>Source:</p>
+<ul>
+<li><a href="http://www.youtube.com/watch?v=yOSGC67bOIk">Unit 5, 48</a></li>
+<li><a href="http://www.youtube.com/watch?v=xRf9wAeU1kI">Unit 5, 49</a></li>
+</ul>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/control-flow.html#control-flow">Control flow</a></h1>
+    <p>
+      Posted on Thu 19 December 2013 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>Control flow tools is something I've always been really bad at beyond the basic loops and if-else statements. Or actually something I've never really known what was. But today as I was prototyping a script, I wanted to write up some program structure, and got hit hard in the head with the importance of understanding some of the &#8220;exotic&#8221; control flow tools.</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">inpt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39; &#39;</span><span class="p">:</span>
+    <span class="c1">#initialize splitting of current word</span>
+<span class="k">if</span> <span class="n">inpt</span> <span class="o">==</span> <span class="s1">&#39;redo&#39;</span><span class="p">:</span>
+    <span class="c1">#initialize code for resplitting entire tweet</span>
+<span class="k">if</span> <span class="n">inpt</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+    <span class="n">saveline</span><span class="p">(</span><span class="n">w</span><span class="o">+</span><span class="n">sep</span><span class="o">+</span><span class="n">inpt</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">f</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">inpt</span> <span class="o">=</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
+    <span class="n">quit</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Will give you a very hard to understand error</p>
+<div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span>
+    <span class="k">if</span> <span class="n">inpt</span> <span class="o">==</span> <span class="s1">&#39;redo&#39;</span><span class="p">:</span>
+     <span class="o">^</span>
+<span class="ne">IndentationError</span><span class="p">:</span> <span class="n">expected</span> <span class="n">an</span> <span class="n">indented</span> <span class="n">block</span><span class="o">&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>But my indentations are okay!</p>
+<h2>Pass</h2>
+<p><code>pass</code> is a control flow tool that can stand in for nothing. Python expects something after an <code>if-statement</code>, so in the above example it assumes the following <code>if-statement</code> is nested, but since it hasn't been indented probably, Python throws an error.</p>
+<p><code>pass</code> tells Python that this too, shall pass.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">thistooshallpass</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
+<p>won't throw any errors, and let you place functions and other structures in-place in your code, waiting to be filled with actual instructions, once future you gets off your lazy bum.</p>
+<h2>Break &amp; Continue</h2>
+<p>These are pretty cool too. <code>Break</code> stops a <code>for</code> or <code>while-loop</code> prematurely, while <code>continue</code> jumps back to the next iteration of a <code>for</code> or a <code>while-loop</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">break</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
+   <span class="o">...</span><span class="p">:</span> <span class="k">print</span> <span class="n">a</span>
+   <span class="o">...</span><span class="p">:</span> 
+<span class="mi">0</span>
+</pre></div>
+
+
+<p><code>a</code> never grows, because the <code>break</code> construct broke out of the <code>while-loop</code> (and saved us from an indefinite loop too!)</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="k">if</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">5</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>                 <span class="k">continue</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="k">break</span>
+   <span class="o">...</span><span class="p">:</span> <span class="k">print</span> <span class="n">i</span>
+   <span class="o">...</span><span class="p">:</span> 
+<span class="mi">5</span>
+</pre></div>
+
+
+<p>Here the <code>break</code> statement is not reached while <code>i</code> &lt; 5, but once it hit 5, the <code>continue</code> statement is no longer executed and the interpreter reaches the <code>break</code> statement and terminates the loop, thus giving us a nice 5.</p>
+<ul>
+<li>See more here: <a href="http://docs.python.org/2/tutorial/controlflow.html">http://docs.python.org/2/tutorial/controlflow.html</a></li>
+<li>And this guy has a great use of brake and continue to build a construct that let's you break out of nested loops: <a href="http://stackoverflow.com/a/654002">http://stackoverflow.com/a/654002</a></li>
+</ul>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/regular-expressions.html#regular-expressions">Regular expressions</a></h1>
+    <p>
+      Posted on Mon 09 December 2013 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p><a href="http://pypix.com/tools-and-tips/advanced-regular-expression-tips-techniques/">pypix advanced REGEX tips</a></p>
+<p>And here's a nice cheat-sheet curtesy of HN's comments <a href="http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt">REGEX cheat sheet</a></p>
+<p>Even better is [<a href="http://pypix.com/tools-and-tips/advanced-regular-expression-tips-techniques/">pypix advanced REGEX tips</a></p>
+<p>And here's a nice cheat-sheet curtesy of HN's comments <a href="http://www.geocities.jp/kosako3/oniguruma/doc/RE.txt">REGEX cheat sheet</a></p>
+<p>Even better is](http://www.regex101.com " regular expressions 101 — an online regex tester for javascript, php, pcre and python. ") &#8211; this web-app is nothing short of amazing! You can type in all sorts of regular expression flavours and can live see how the search (and replace!) will work. More over it will interpret your regular expression into human readable instructions and give you a reason for why each matched string matched.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/decorators-and-python-objects-demystified.html#decorators-and-python-objects-demystified">Decorators and python objects demystified</a></h1>
+    <p>
+      Posted on Thu 05 December 2013 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>This article explains very well how decorators works, and a lot about how everything in Python is an object (last time I'll be making a variable with the same name as a function!)</p>
+<p><a href="http://yasoob.github.io/blog/python-decorators-demystified/">http://yasoob.github.io/blog/python-decorators-demystified/</a></p>
+<p>The jist is that any function is an object and can be parsed into another function, and the @-decorator is shorthand for doing just that!</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func_a</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;func a&quot;</span>
+    <span class="n">func</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">func_b</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;func b&quot;</span>
+
+<span class="n">func_b</span> <span class="o">=</span> <span class="n">func_a</span><span class="p">(</span><span class="n">func_b</span><span class="p">)</span>
+<span class="n">func_b</span><span class="p">()</span>
+<span class="c1"># func a</span>
+<span class="c1"># func b</span>
+</pre></div>
+
+
+<p>is the same as</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func_a</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot;func a&quot;</span>
+    <span class="n">func</span><span class="p">()</span>
+<span class="nd">@func_a</span>
+<span class="k">def</span> <span class="nf">func_b</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s2">&quot;func b&quot;</span>
+
+<span class="n">func_b</span><span class="p">()</span>
+<span class="c1"># func a</span>
+<span class="c1"># func b</span>
+</pre></div>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/finding-coordinates-in-a-picture.html#finding-coordinates-in-a-picture">Finding coordinates in a picture</a></h1>
+    <p>
+      Posted on Sun 01 December 2013 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>This is a very handy one liner I found in <a href="http://programmingcomputervision.com/" title="Programming Computer Vision Book">Programming Computer Vision</a>, that can give you the coordinates of non-black pixels in an image.</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">a</span><span class="p">[</span><span class="n">a</span><span class="o">&gt;</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="n">a</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">27</span><span class="p">]:</span> 
+<span class="n">array</span><span class="p">([[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="n">coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">nonzero</span><span class="p">())</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="n">coord</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span> 
+<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+</pre></div>
+
+
+<p>It's the <code>np.array(a.nonzero()).T</code> where the magic happens.</p>
+<ul>
+<li><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.nonzero.html#numpy.nonzero">array.nonzero()</a></li>
+</ul>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn" href="/index7.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
+    <a class="btn float-right" href="/index5.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

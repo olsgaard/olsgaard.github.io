@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard &ndash; Category: misc</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/python-static-typing.html#python-static-typing">Python static typing</a></h1>
+    <p>
+      Posted on Sun 26 June 2016 in <a href="/category/misc.html">misc</a>
+    </p>
+  </header>
+  <div>
+    <p>Normally in Python if you create a variable <code>i</code> as an integer, you can later assign a a string value. <code>i</code> just points to some data of some type in memory and can be re-assigned at will.</p>
+<p>This can make it hard to reason about code. Is the input to this function a <code>float</code> or an <code>integer</code>? A <code>list</code> or an <code>array</code>?</p>
+<p>With static typing a variable can't change its type and it can make reasoning about some code easier. If you know that <code>i</code> is an integer and you know that no-matter what, it will never become a float, then you can always use <code>i</code> as an index. With true static typing, you will even get an error if you try and change <code>i</code>.</p>
+<p>In Python you can annotate type and you can have a script check if these annotations are violated at any point in code, as a sort of pre-execution sanity check.</p>
+<p>Here is how it works:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="k">def</span> <span class="nf">myfunction</span><span class="p">(</span><span class="n">list_of_int</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">floatingpoint</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; This function takes a list of integers and a</span>
+<span class="sd">    floating point number and returns a boolean &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+
+
+<h3>links:</h3>
+<ul>
+<li><a href="https://docs.python.org/3/library/typing.html#typing.List">https://docs.python.org/3/library/typing.html#typing.List</a></li>
+<li><a href="https://www.reddit.com/r/Python/comments/4lonc3/static_typing_for_python/d3ue4kl?context=3">https://www.reddit.com/r/Python/comments/4lonc3/static_typing_for_python/d3ue4kl?context=3</a></li>
+<li><a href="https://www.dropbox.com/s/efatwr0pozsargb/PyCon%20mypy%20talk%202016.pdf?dl=0">https://www.dropbox.com/s/efatwr0pozsargb/PyCon%20mypy%20talk%202016.pdf?dl=0</a></li>
+</ul>
+  </div>
+</article>
+
+  <div class="pagination">
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

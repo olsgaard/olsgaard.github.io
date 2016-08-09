@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="If you have a large corpus of text files in, say euc-jp encoding, they can be quite difficult to work with, since most command-line tools on modern systems expects utf-8 files. iconv can be used to convert file encodings from one known encoding to another. One problem on OSX is ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Convert encoding for multiple files recursively"/>
+<meta property="og:description" content="If you have a large corpus of text files in, say euc-jp encoding, they can be quite difficult to work with, since most command-line tools on modern systems expects utf-8 files. iconv can be used to convert file encodings from one known encoding to another. One problem on OSX is ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/convert-encoding-for-multiple-files-recursively.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-01-14 12:59:28+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Convert encoding for multiple files recursively</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="convert-encoding-for-multiple-files-recursively">Convert encoding for multiple files recursively</h1>
+    <p>Posted on Thu 14 January 2016 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>If you have a large corpus of text files in, say euc-jp encoding, they can be quite difficult to work with, since most command-line tools on modern systems expects utf-8 files.</p>
+<p>iconv can be used to convert file encodings from one known encoding to another. One problem on OSX is that the -o option doesn't work and instead you have to use the <em>redirect operator</em> <code>&gt;</code>. Moreover you can't do this to overwrite an existing file, so if you have a large, complex directory structure you need to traverse recursively to change the encoding of each file, it becomes problematic.</p>
+<p>I've found the following to work very well:</p>
+<div class="highlight"><pre><span></span>find . -type f -exec sh -c <span class="s2">&quot;iconv -f eucjp -t UTF-8 {} &gt; {}.utf8&quot;</span>  <span class="se">\;</span> -exec mv <span class="s2">&quot;{}&quot;</span>.utf8 <span class="s2">&quot;{}&quot;</span> <span class="se">\;</span>
+</pre></div>
+
+
+<ul>
+<li><code>find</code> finds all files and directories recursively</li>
+<li><code>.</code> denotes starting directory. In this case, the current directory and thus everything below as well.</li>
+<li><code>-type f</code> limits the search to files only (so no directories will be returned)</li>
+<li><code>-exec</code> executes a command for each search result</li>
+<li><code>sh -c</code> opens bash shell, and executes the string followin -c</li>
+<li><code>iconv -f eucjp -t UTF-8</code> converts encoding -f(rom) euc-jp to utf-8</li>
+<li><code>{}</code> denotes the search result (filename)</li>
+<li><code>&gt;</code> the redirect operator. We run this line via the shell to get this to work, since it doesn't work if run directly via the -exec command (what a mess!)</li>
+<li><code>{}.utf8</code> save to a file with &#8220;utf8&#8221; as the extension</li>
+<li><code>"  \;</code> close the bash command and close the -exec command.</li>
+<li><code>-exec</code> do another command with the search result</li>
+<li><code>mv "{}".utf8 "{}"</code> move the new file to the old filename, thus overwriting the original file</li>
+<li><code>\;</code> close the second -exec command.</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Convert encoding for multiple files recursively",
+  "headline": "Convert encoding for multiple files recursively",
+  "datePublished": "2016-01-14 12:59:28+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/convert-encoding-for-multiple-files-recursively.html",
+  "description": "If you have a large corpus of text files in, say euc-jp encoding, they can be quite difficult to work with, since most command-line tools on modern systems expects utf-8 files. iconv can be used to convert file encodings from one known encoding to another. One problem on OSX is ..."
+}
+</script></body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="This is a problem I've been having after switching from OSX' default bash to oh-my-zsh. When importing things like matplotlib in Python I get the following error: ValueError: unknown locale: UTF-8 The problem is that the locale has not been set and UTF-8 is not a valid locale ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Fix "ValueError: unknown locale: UTF-8" under Mac OS X'"/>
+<meta property="og:description" content="This is a problem I've been having after switching from OSX' default bash to oh-my-zsh. When importing things like matplotlib in Python I get the following error: ValueError: unknown locale: UTF-8 The problem is that the locale has not been set and UTF-8 is not a valid locale ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/fix-valueerror-unknown-locale-utf-8-under-mac-os-x.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-04-04 15:03:27+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Fix "ValueError: unknown locale: UTF-8" under Mac OS X'</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="fix-valueerror-unknown-locale-utf-8-under-mac-os-x">Fix "ValueError: unknown locale: UTF-8" under Mac OS X'</h1>
+    <p>Posted on Mon 04 April 2016 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>This is a problem I've been having after switching from OSX' default bash to oh-my-zsh.</p>
+<p>When importing things like <code>matplotlib</code> in Python I get the following error:</p>
+<div class="highlight"><pre><span></span><span class="n">ValueError</span><span class="o">:</span> <span class="n">unknown</span> <span class="n">locale</span><span class="o">:</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+</pre></div>
+
+
+<p>The problem is that the locale has not been set and UTF-8 is not a valid locale, as it is only an encoding.</p>
+<p>In bash or zsh run</p>
+<div class="highlight"><pre><span></span>$ locale
+</pre></div>
+
+
+<p>if it looks like</p>
+<div class="highlight"><pre><span></span><span class="nv">LANG</span><span class="o">=</span>
+<span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_MONETARY</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_TIME</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_ALL</span><span class="o">=</span>
+</pre></div>
+
+
+<p>You are in trouble. You want it to look something like the following if you are using US locale</p>
+<div class="highlight"><pre><span></span><span class="nv">LANG</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_MONETARY</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_TIME</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_ALL</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+</pre></div>
+
+
+<p>If you browse around the web for a solution you will be told to add</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+<span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+</pre></div>
+
+
+<p>To all sorts of places. <code>~/.bash</code>, <code>~/.profile</code>, <code>/etc/.profile</code> and the list goes on. If you are running oh-my-zsh you need to edit <code>~/.zshrc</code> and add the above two lines and restart you terminal and python as well.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Fix "ValueError: unknown locale: UTF-8" under Mac OS X'",
+  "headline": "Fix "ValueError: unknown locale: UTF-8" under Mac OS X'",
+  "datePublished": "2016-04-04 15:03:27+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/fix-valueerror-unknown-locale-utf-8-under-mac-os-x.html",
+  "description": "This is a problem I've been having after switching from OSX' default bash to oh-my-zsh. When importing things like matplotlib in Python I get the following error: ValueError: unknown locale: UTF-8 The problem is that the locale has not been set and UTF-8 is not a valid locale ..."
+}
+</script></body>
+</html>

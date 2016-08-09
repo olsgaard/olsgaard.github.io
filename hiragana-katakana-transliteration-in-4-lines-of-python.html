@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="This is a quick script to make good hiragana <-> katakana conversion in just 4 lines of Python. This code will make it easy to convert かたかな to カタカナ and ヒラガナ to ひらがな without any dependencies. It even handles mixed script correctly. If you don't need romaji translitteration and want ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="'Hiragana katakana transliteration in 4 lines of Python'"/>
+<meta property="og:description" content="This is a quick script to make good hiragana <-> katakana conversion in just 4 lines of Python. This code will make it easy to convert かたかな to カタカナ and ヒラガナ to ひらがな without any dependencies. It even handles mixed script correctly. If you don't need romaji translitteration and want ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/hiragana-katakana-transliteration-in-4-lines-of-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-05-26 16:03:46+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; 'Hiragana katakana transliteration in 4 lines of Python'</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="hiragana-katakana-transliteration-in-4-lines-of-python">'Hiragana <-> katakana transliteration in 4 lines of Python'</h1>
+    <p>Posted on Thu 26 May 2016 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>This is a quick script to make good hiragana &lt;-&gt; katakana conversion in just 4 lines of Python.</p>
+<p>This code will make it easy to convert <code>かたかな</code> to <code>カタカナ</code> and <code>ヒラガナ</code> to <code>ひらがな</code> without any dependencies. It even handles mixed script correctly.</p>
+<p>If you don't need romaji translitteration and want to lower your scripts dependencies you can forgo pip installing some surprisingly large libraries just to convert from hiraganan to katakana and simply copy paste the below 4 lines (and preferrably a link to my homepage or github) and you are good to go.</p>
+<p>Tested in Python 3.x, doesn't seem to work in Python 2.7</p>
+<p>Download it off my github <a href="https://github.com/olsgaard/Japanese_nlp_scripts/blob/master/hiragana_katakana_translitteration.py">here</a></p>
+<h1>How it works</h1>
+<p>I use the builtin string function <code>translate</code> which converts characters to corrosponding characters in a translations table, easily created with another string function, <code>maketrans</code>. <a href="https://docs.python.org/3/library/stdtypes.html#str.translate">See documentation here</a></p>
+<p>We simply create our hiragana and katakana translation tables and use the <code>str.translate()</code> function to do the heavy lifting.</p>
+<p>I've used <a href="http://www.localizingjapan.com/blog/2012/01/20/regular-expressions-for-japanese-text/">Mark Rogoyski</a> list of hiragana and katakana unicode codepoints and removed characters I don't want transliterated. For example, I want to be able to convert コーヒ to hiragana and back. If I had naively used the table, then <code>ー</code> would be converted into <code>゜</code>, which wouldn't make any sense.</p>
+<p>The magic happens in these 4 lines of code:</p>
+<div class="highlight"><pre><span></span><span class="n">katakana_chart</span> <span class="o">=</span> <span class="s2">&quot;ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶヽヾ&quot;</span>
+<span class="n">hiragana_chart</span> <span class="o">=</span> <span class="s2">&quot;ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんゔゕゖゝゞ&quot;</span> 
+<span class="n">hir2kat</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="n">hiragana_chart</span><span class="p">,</span> <span class="n">katakana_chart</span><span class="p">)</span>
+<span class="n">kat2hir</span>  <span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="n">katakana_chart</span><span class="p">,</span> <span class="n">hiragana_chart</span><span class="p">)</span>
+</pre></div>
+
+
+<p>And it is used like so:</p>
+<div class="highlight"><pre><span></span><span class="n">mixed</span> <span class="o">=</span> <span class="s1">&#39;きゃりーぱみゅぱみゅは日本の歌手です。&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mixed</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">hir2kat</span><span class="p">))</span>
+<span class="c1"># out: キャリーパミュパミュハ日本ノ歌手デス。</span>
+
+<span class="c1"># transliterate back and forth</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mixed</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">hir2kat</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">kat2hir</span><span class="p">))</span>
+<span class="c1"># out: きゃりーぱみゅぱみゅは日本の歌手です。</span>
+</pre></div>
+
+
+<p>Notice how kanji and special characters are left alone.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "'Hiragana katakana transliteration in 4 lines of Python'",
+  "headline": "'Hiragana katakana transliteration in 4 lines of Python'",
+  "datePublished": "2016-05-26 16:03:46+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/hiragana-katakana-transliteration-in-4-lines-of-python.html",
+  "description": "This is a quick script to make good hiragana <-> katakana conversion in just 4 lines of Python. This code will make it easy to convert かたかな to カタカナ and ヒラガナ to ひらがな without any dependencies. It even handles mixed script correctly. If you don't need romaji translitteration and want ..."
+}
+</script></body>
+</html>

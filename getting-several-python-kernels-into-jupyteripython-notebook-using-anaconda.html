@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="To get Jupyter notebooks to use several different Python kernels using Anaconda, so the following from the commandline: $ conda create -n py27 anaconda python=2.7 $ source activate py27 $ conda install notebook ipykernel $ ipython kernel install In the first line, the -n py27 sets the name of the new environment ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Getting several python kernels into JuPyter/IPython notebook using Anaconda"/>
+<meta property="og:description" content="To get Jupyter notebooks to use several different Python kernels using Anaconda, so the following from the commandline: $ conda create -n py27 anaconda python=2.7 $ source activate py27 $ conda install notebook ipykernel $ ipython kernel install In the first line, the -n py27 sets the name of the new environment ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/getting-several-python-kernels-into-jupyteripython-notebook-using-anaconda.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-01-29 15:56:29+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Getting several python kernels into JuPyter/IPython notebook using Anaconda</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="getting-several-python-kernels-into-jupyteripython-notebook-using-anaconda">Getting several python kernels into JuPyter/IPython notebook using Anaconda</h1>
+    <p>Posted on Fri 29 January 2016 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p><img alt="" src="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-29-at-16.46.50.png" /></p>
+<p>To get Jupyter notebooks to use several different Python kernels using Anaconda, so the following from the commandline:</p>
+<div class="highlight"><pre><span></span>$ conda create -n py27 anaconda <span class="nv">python</span><span class="o">=</span>2.7 
+$ <span class="nb">source</span> activate py27 
+$ conda install notebook ipykernel
+$ ipython kernel install
+</pre></div>
+
+
+<p>In the first line, the <code>-n py27</code> sets the name of the new environment we <code>create</code> to <code>py27</code>. This is a handy name for a Python 2.7 environment. <code>anaconda</code> denotes the packages we want installed. The <code>anaconda</code> package contains all the scientific packages you'd expect (numpy, scipy, matplolib, sklearn, etc.) <code>python=2.7</code> tells conda to create the environment with python version 2.7</p>
+<p>The second line switches you to the new virtual environment.</p>
+<p>Third and fourth line installs the kernel into IPython notebook.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Getting several python kernels into JuPyter/IPython notebook using Anaconda",
+  "headline": "Getting several python kernels into JuPyter/IPython notebook using Anaconda",
+  "datePublished": "2016-01-29 15:56:29+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/getting-several-python-kernels-into-jupyteripython-notebook-using-anaconda.html",
+  "description": "To get Jupyter notebooks to use several different Python kernels using Anaconda, so the following from the commandline: $ conda create -n py27 anaconda python=2.7 $ source activate py27 $ conda install notebook ipykernel $ ipython kernel install In the first line, the -n py27 sets the name of the new environment ..."
+}
+</script></body>
+</html>

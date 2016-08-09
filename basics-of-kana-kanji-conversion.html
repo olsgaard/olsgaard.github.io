@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="A kana/kanji conversion system goal is to convert a string of phonetical characters – kana – into a string of mixed logographic kanji and phonetic kana. That is, we want to go from ごはんをたべます →ご飯を食べます (To eat a meal). Let $W$ be a set of words ${w_1, w_2 ... w_n}$ in a ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Basics of Kana-kanji conversion"/>
+<meta property="og:description" content="A kana/kanji conversion system goal is to convert a string of phonetical characters – kana – into a string of mixed logographic kanji and phonetic kana. That is, we want to go from ごはんをたべます →ご飯を食べます (To eat a meal). Let $W$ be a set of words ${w_1, w_2 ... w_n}$ in a ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/basics-of-kana-kanji-conversion.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2014-11-04 03:46:34+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Basics of Kana-kanji conversion</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="basics-of-kana-kanji-conversion">Basics of Kana-kanji conversion</h1>
+    <p>Posted on Tue 04 November 2014 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>A kana/kanji conversion system goal is to convert a string of phonetical characters &#8211; kana &#8211; into a string of mixed logographic kanji and phonetic kana. That is, we want to go from ごはんをたべます →ご飯を食べます (To eat a meal).</p>
+<p>Let $W$ be a set of words ${w_1, w_2 ... w_n}$ in a sentence (in the above example W would be ご飯を食べます). $P(W)$ is the probability that this sentence exists in the language. In practice that is, how many times does this exact sentence show up in our training data. Since very few sentences show up in written language more than once, the chance that we will deal with a sentence that does not exist in our training set is quite high. Therefore we tend to let $W$ be a collection of uni, bi, and trigrams and their associated frequenzy. $P(W)$ is also known as our <a href="http://en.wikipedia.org/wiki/Language_model">language model</a>.</p>
+<p>Let $A$ be a string of phonetic characters &#8211; or kana &#8211; so that $A = {a_1, a_2 ... a_m}$.</p>
+<p>Now we want to find the most probable string $W$ associated with the input string $A$.</p>
+<p>A classic example is きしゃのきしゃがきしゃのきしゃできしゃした which we typically want to <a href="assets/2014/11/240px-IlkhanidHorseArcher.jpg"></a>be 貴社の記者が貴社の汽車で帰社した (Your reporter was sent home in your train). Given that all the nouns in the phrase is pronounced きしゃ(kisha) this leads to a large variety of more or less meaningful, but still possible sentences. The reporter could be sent home in the reporters own train, or the train could be sent home on the reporter. The reporter or train could even be involved in <a href="http://ja.wikipedia.org/wiki/%E9%A8%8E%E5%B0%84">mounted archery</a> (騎射 also read きしゃ) if one is imaginative enough. However entertaining that may be, it is the job of our kana-kanji converter to convert to the most likely sentence, not the most entertaining.</p>
+<p>Using Bayes theorem we can ask <em>What is the probability of an observed kana string A, given a sentence W?</em></p>
+<p>$$P(W|A) = \frac{P(A|W)P(W)}{P(A)} $$</p>
+<p style="text-align: right;">
+  [1]
+</p>
+
+<p>And we want to find the W that maximizes this probability, so that $W^* = arg_wmaxP(W|A) =  arg_wmax\frac{P(A|W)P(W)}{P(A)}$</p>
+<p>We tend to assume that users will correctly type the kana input that they intend to type. That is, there are no typos and there are no spelling mistakes (note the general absence of Japanese spellcheckers in the market place). So we can assume that $P(A) = 1$.</p>
+<p>We can make a few more assumptions about the Japanese language. For example, if we have a sentence W, then we can be very certain that there is only 1 kana string A that fits. ご飯を食べます can only be read ごはんをたべます in basically any circumstance that we would come across. So $P(A|W)=1$, for most sentence and we can further reduce [1] to $$P(W|A) = P(W) $$ or to put it in a different way, the most likely correct sentence is completely dependent on the language model ((Suzuki, Hisami, and Jianfeng Gao. Microsoft Research IME Corpus. Microsoft Research Technical Report, 2005. <a href="http://131.107.65.14/pubs/70243/tr-2005-168.pdf.">http://131.107.65.14/pubs/70243/tr-2005-168.pdf.</a></p>
+<p>)).</p>
+<h2>Caveats</h2>
+<p>However, things are not always as simple as described above.</p>
+<h3>Input string A and P(A)</h3>
+<p>We assume input to be a string of phonetic character representations that we must convert into an actual sentence, very much like how we would do in a text-speech system. However, to complicate matters, both input and output strings will often contain alphanumeric characters as well as punctuation. Some of these &#8211; such as numbers &#8211; may have an effect on how conversion of following kana must be done, others characters &#8211; mostly alphabet characters &#8211; will not and it might be best to ignore such characters during conversion, especially if we suspect the user to input very creative <a href="http://en.wikipedia.org/wiki/Emoticon">emoticon</a> that we haven't met in the training data. However, we may want to substitute single width alphabet to double width and we may or may not want to convert alphabet into kana.</p>
+<p>Moreover, we assume the user to type correctly. There appears to be very little research into what kind of spelling mistakes Japanese writers tend to make when typing Japanese on a keyboard or smartphone. There exist research on the errors people make when writing by hand or when typing English, but it appears to be silently assumed by academics that Japanese authors type correctly. It does seem unlikely, though, that Japanese writers never forget to add a ” or make a や or a ゆ small. A literature search only found 1 paper dealing with proofing written Japanese ((Takeda, Koichi, Emiko Suzuki, Tetsuro Nishino, and Tetsunosuke Fujisaki. “CRITAC—An Experimental System for Japanese Text Proofreading.” IBM Journal of Research and Development 32, no. 2 (1988): 201–16.</p>
+<p>)), while more research appears to have gone into how Japanese writers misspell English text ((Ishikawa, Masahiko. Apparatus for Correcting Misspelling and Incorrect Usage of Word. Google Patents, 1998. <a href="http://www.google.com/patents/US5812863.">http://www.google.com/patents/US5812863.</a></p>
+<p>Mitton, Roger, and Takeshi Okada. “The Adaptation of an English Spellchecker for Japanese Writers,” 2007. <a href="http://eprints.bbk.ac.uk/592.">http://eprints.bbk.ac.uk/592.</a></p>
+<p>)).</p>
+<p>**</p>
+<p>So in the real world, $P(A) \ne 1$**</p>
+<h3>Unambiguity of the reading of a known sentence</h3>
+<p>Earlier I described how we can assume $P(A|W) = 1$. This is an important assumption for a lot of practical reasons. Mainly, because training data is expensive to annotate, but with this assumption we can annotate training data with kana readings <em>automatically</em>, without human intervention. This is how Baidu ((Wu, Xianchao, Rixin Xiao, and Xiaoxin Chen. “Using the Web to Train a Mobile Device Oriented Japanese Input Method Editor,” 2013. <a href="http://www.aclweb.org/anthology/I/I13/I13-1172.pdf.">http://www.aclweb.org/anthology/I/I13/I13-1172.pdf.</a></p>
+<p>)) is able to build a 2.5 terabyte training corpus from the web. This would be impossible to annotate by hand.</p>
+<p>But the readings of a Japanese sentence <em>is</em> ambiguous at times. 今日 can in basically every instance it occurs in Japanese be read either きょう or こんにち, with the latter being too polite for most occasions, but still a possibility. If we expand the earlier example sentence to 私はご飯を食べます (I eat a  meal) it is impossible to deduce if the author meant to use the very polite わたくし or the normal わたし. Given that most automated will convert 私 into わたし we get a self reenforcing that the shorter form should be used.</p>
+<p><strong>So in the real world, $P(A|W) \ne 1$</strong></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Basics of Kana-kanji conversion",
+  "headline": "Basics of Kana-kanji conversion",
+  "datePublished": "2014-11-04 03:46:34+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/basics-of-kana-kanji-conversion.html",
+  "description": "A kana/kanji conversion system goal is to convert a string of phonetical characters – kana – into a string of mixed logographic kanji and phonetic kana. That is, we want to go from ごはんをたべます →ご飯を食べます (To eat a meal). Let $W$ be a set of words ${w_1, w_2 ... w_n}$ in a ..."
+}
+</script></body>
+</html>

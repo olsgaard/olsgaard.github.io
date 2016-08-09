@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard &ndash; Posts by: Olsgaard</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/phonixpy-phonetic-name-search-in-python.html#phonixpy-phonetic-name-search-in-python">'Phonix.py &#8211; phonetic name search in Python'</a></h1>
+    <p>
+      Posted on Tue 24 March 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <blockquote>
+<ul>
+<li>
+<p>ICL, good morning!</p>
+</li>
+<li>
+<p>Good morning, my name is George Parson. I’m looking for one of your employees, Philip Carlquist from Engsboda.</p>
+</li>
+<li>
+<p>Let me see, Filip Karlkvist you said ... no, I’m sorry I can’t find anybody here with that name. I’ll just look up the location, ... Ängsboda, no, we don’t even seem to have an office there. Are you sure he works for ICL sir?</p>
+</li>
+<li>
+<p>Quite sure. I met him only last week.</p>
+</li>
+<li>
+<p>Well, I’m sorry, he is not in the computer, he must have left the company since.</p>
+</li>
+<li>
+<p>But ...</p>
+</li>
+</ul>
+</blockquote>
+<p>Looking up names can be difficult, because there are many possible ways to spell otherwise similar sounding names and places and we can't expect the user to know of - or even think to try - all possible spellings.</p>
+<p>Phonetic search algorithms dates back to the early 1900 when Russel &amp; Odell invented the Soundex algorithm in order to <em>simplify and improve an index wherein names are to be entered and grouped phonetically rather than in accordance with the alphabetical construction of the names (<a href="http://www.google.com/patents/US1435663" title="Patent file of Soundex, 1918">Patent 1918</a>).</em></p>
+<p>Soundex grew to fame when it was later used for an genealogical analysis of the US Census data from 1890-1920. Today, despite its limitation it is found everywhere from SQL to The Art of Computer Programming.</p>
+<p>The algorithm splits all letters in a name into 1 of 8 groups, each represented by a number 0-7. All zeros and consecutive numbers are pruned. The first letter of the original name is reinstated, and if result is less than 4 characters long, it is extended by zeros.</p>
+<p>Not content with the obvious short comings of this approach, T. N. Gadd sat down and painstakingly constructed no less than 160 rules for how to change the spelling of names to be more phonetic. He also optimized the grouping and published the new resulting algorithm, Phonix, in 1988's 3rd number of'Information System', under the catching title: "Fisching Fore Werds", which if run through the Phonix algorithm would produce the same result as "Fishing for words".</p>
+<p>Since the Phonix algorithm is at the heart of several more advanced phonetic search algorithms, and there exists no live open implementation of it, I decided to reimplement it in Python and release it publicly under BSD.</p>
+<ul>
+<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/Phonix_implementation.ipynb" title="Right-click &gt; Download, to save the iPython Notebook">Download the iPython notebook and play with the algorithm yourself.</a></li>
+<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/phonix.py" title="Right-click &gt; Download, to save the python script">Download the python script and use it in a project</a></li>
+</ul>
+<p>Or</p>
+<ul>
+<li><a href="https://github.com/olsgaard/phonetic_search" title="Github repository">Fork it on Github!</a></li>
+</ul>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/on-science-and-engineering.html#on-science-and-engineering">On science and engineering</a></h1>
+    <p>
+      Posted on Fri 27 February 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <blockquote>
+<p>Science: If you know what you are doing, you are doing it wrong.</p>
+<p>Engineering: If you don't know what you are doing, you are doing it wrong</p>
+</blockquote>
+<p style="text-align: right;">
+  Dr. Richard W. Hamming, 1995 "<a title="Hamming, Intro to The Art of Doing Science and Engineering: Learning to Learn (March 28, 1995) " href="https://www.youtube.com/watch?v=AD4b-52jtos&list=PL2FF649D0C4407B30">Learning to learn</a>""
+</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/measuring-succes-of-voice-activity-detection-algorithms-hr0-and-hr1.html#measuring-succes-of-voice-activity-detection-algorithms-hr0-and-hr1">Measuring succes of Voice Activity Detection algorithms. HR0 and HR1</a></h1>
+    <p>
+      Posted on Fri 06 February 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>When measuring the effectiveness of a Voice Activity Detection algorithm (<a href="https://en.wikipedia.org/wiki/Voice_activity_detection" title="Voice Activity Detection on Wikipedia">VAD</a>) looking at 0-1 accuracy is rarely enough. We typically also look at <em>Nonspeech Hit Rate</em> (HR0) and <em>Speech Hit Rate</em> (HR1).</p>
+<ol>
+<li><strong>HR0</strong> is computed as the ratio of the number of correctly detected nonspeech frames to the number of real nonspeech frames.</li>
+<li><strong>HR1</strong> is computed as the ratio of the number of correctly detected speech frames to the number of real speech frames.</li>
+</ol>
+<p style="text-align: right;">
+  <em>Park et al. 2014 [1]</em>
+</p>
+
+<p>Another way to put it is _the percentage of nonspeech and speech frames that are correctly predicted. In Python, this can be calculated in the following way:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">our</span><span class="o">-</span><span class="n">vad</span><span class="o">-</span><span class="n">library</span> <span class="k">as</span> <span class="n">VAD</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">load_targets</span><span class="p">()</span>
+
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Find nonspeech and speech hit rates:</span>
+<span class="n">index0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">index1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">hr0</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_hat</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">hr1</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_hat</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index1</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+
+<p>First we create 2 indexes of y using numpy's <code>where()</code> function (<a title="numpy.where — NumPy v1.9 Manual:" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html">see more</a>). <code>index0</code> is a vector of all the positions of y that represents a silent frame in our data. Say <code>y = [0,0,0,1,1,0]</code>, then <code>index0 = [0,1,2,5]</code>, since <code>y[0] = y[1] = y[2] = y[5] = 0.</code></p>
+<p>this means that</p>
+<div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> 
+<span class="c1"># -&gt; [0,0,0,0]</span>
+</pre></div>
+
+
+<p>Which in and of itself is not interesting. However, we can use the same index to pull out all the predictions in ŷ and compare them to the ground-truth in y</p>
+<div class="highlight"><pre><span></span><span class="n">y_hat</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span>
+<span class="c1"># -&gt; (True, True, False ... , dtype=bool)</span>
+</pre></div>
+
+
+<p>This gives us a new array of the same dimensions with boolean <code>True</code> or <code>False</code> values. Each <code>True</code> represents a correct prediction and each <code>False</code> an incorrect. A neat python trick is that boolean values are treated as 0 and 1, so we can take the mean of this boolean result array to get the ratio between correct and incorrect prediction using the <code>.mean()</code> function.</p>
+<hr />
+<p>[1] Park, Jinsoo, Wooil Kim, David K. Han, and Hanseok Ko. “Voice Activity Detection in Noisy Environments Based on Double-Combined Fourier Transform and Line Fitting.” <em>The Scientific World Journal</em> 2014 (August 6, 2014): e146040. doi:10.1155/2014/146040.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/quote.html#quote">Quote</a></h1>
+    <p>
+      Posted on Mon 26 January 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <blockquote>
+<p>If [the curse of dimensionality] problem didn't exist, we would use the nearest neighbour averaging as the sole basis for doing estimation.</p>
+</blockquote>
+<p style="text-align: right;">
+  <a href="https://en.wikipedia.org/wiki/Trevor_Hastie">Trevor Hastie</a> from his "Dimensionality and structured models" lecture in his <a href="https://class.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about">Statistical Learning</a> course at Stanford.
+</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/algorithms-sensitivity-to-single-salient-dimension.html#algorithms-sensitivity-to-single-salient-dimension">Algorithms sensitivity to single salient dimension</a></h1>
+    <p>
+      Posted on Fri 23 January 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>I was doing a <em>voice activity detection</em> algorithm and testing my implementation on speech data recorded in a silent room. My first feature was a simple energy level detector, basically giving a number to how high volume each frame of sound contains. Since there was no noise on the recordings, the mere presence of volume explained 93% of the results.</p>
+<p>I decided to ad frequencies to the feature vector. Given that each frame is 80 miliseconds, this makes it possible to calculate the energy of some 40 distinct frequencies. I'd expect the few coughs and breathings that were mistaken as speech to have a different frequency profile and be cut out using this larger dataset. To my surprise, my nearest neighbour classifier improved with a few percentage points, while my SVM plummeted with over 20 points accuracy.</p>
+<p>I realize that the saliency of these ~40 new points are very low, compared to energy-datapoint, but I honestly still expected the SVM to figure this out. And i expected the NN to be much weaker against such an increase in dimensions.</p>
+<p>Puzzled, I decided to conduct an experiment looking at how different classifiers handle additional low-saliency dimensions. In this setup only one dimension is salient, but it will how ever completely explain the data. Meanwhile all other dimensions are completely random noise.</p>
+<p><img alt="" src="assets/2015/01/index.png" /></p>
+<p>You can <a href="http://olsgaard.dk/notes/wp-content/uploads/other_files/Sensitivity_to_single_salient_dimension.ipynb" title="Sensitivity to single salient dimension ipython notebook">download the ipython notebook</a> or <a href="http://nbviewer.ipython.org/url/olsgaard.dk/notes/wp-content/uploads/other_files/Sensitivity_to_single_salient_dimension.ipynb" title="View online in nbviewer">read it online</a>. (warning, the code is <em>very</em> stateful and uses global variables, so be sure to execute things in order)</p>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn" href="/author/olsgaard5.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
+    <a class="btn float-right" href="/author/olsgaard3.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

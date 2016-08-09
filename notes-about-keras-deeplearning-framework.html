@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="Short introduction to Keras https://www.youtube.com/watch?v=Tp3SaRbql4k Keras can be thought of as 4 steps Prepare input and output tensors Create first layer (input) Create output layer Build any model inbetween Everything is a layer! Layers are minimally defined as output dimensions (input dimensions are optional ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Notes about Keras deeplearning framework"/>
+<meta property="og:description" content="Short introduction to Keras https://www.youtube.com/watch?v=Tp3SaRbql4k Keras can be thought of as 4 steps Prepare input and output tensors Create first layer (input) Create output layer Build any model inbetween Everything is a layer! Layers are minimally defined as output dimensions (input dimensions are optional ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/notes-about-keras-deeplearning-framework.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-06-27 11:26:34+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Notes about Keras deeplearning framework</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="notes-about-keras-deeplearning-framework">Notes about Keras deeplearning framework</h1>
+    <p>Posted on Mon 27 June 2016 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <h1>Short introduction to Keras</h1>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Tp3SaRbql4k">https://www.youtube.com/watch?v=Tp3SaRbql4k</a></li>
+</ul>
+<h3>Keras can be thought of as 4 steps</h3>
+<ul>
+<li>Prepare input and output tensors</li>
+<li>Create first layer (input)</li>
+<li>Create output layer </li>
+<li>Build any model inbetween</li>
+</ul>
+<h1>Everything is a layer!</h1>
+<p>Layers are minimally defined as output dimensions (input dimensions are optional, typically only required for first layer)</p>
+<p><code>return_sequence</code>, if true output can be feeded to another RNN</p>
+<p>map to a sequence</p>
+<p>if false, feed to fully connected layers</p>
+<p>even <code>dropout</code> is a layer. Makes sense, as dropout can be seen as a</p>
+<p>random matrix that will multiply inputs with 1 or 0</p>
+<h1>models</h1>
+<p>instantiate a model:</p>
+<div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Expand a model</p>
+<div class="highlight"><pre><span></span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="n">layer</span> <span class="nb">type</span><span class="p">])</span>
+</pre></div>
+
+
+<p>Check a model</p>
+<div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+
+<h2>Neural Net is implemented as a model</h2>
+<ul>
+<li>Layers are all contained within a model</li>
+</ul>
+<h3>Sequential model</h3>
+<ul>
+<li>Regular run-of-the-mill NN</li>
+<li>setup input and output layer</li>
+<li>one layer feeds into the next</li>
+</ul>
+<h3>Graph</h3>
+<ul>
+<li>One layer can split into several layers</li>
+</ul>
+<p><code>model.Compile()</code> sets up your model, which loss-function and optimizer that will be used. This will compile the model into machine code via Theano or TensorFlow.</p>
+<p><code>model.fit()</code> is the training function.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Notes about Keras deeplearning framework",
+  "headline": "Notes about Keras deeplearning framework",
+  "datePublished": "2016-06-27 11:26:34+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/notes-about-keras-deeplearning-framework.html",
+  "description": "Short introduction to Keras https://www.youtube.com/watch?v=Tp3SaRbql4k Keras can be thought of as 4 steps Prepare input and output tensors Create first layer (input) Create output layer Build any model inbetween Everything is a layer! Layers are minimally defined as output dimensions (input dimensions are optional ..."
+}
+</script></body>
+</html>

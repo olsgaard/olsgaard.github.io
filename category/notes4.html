@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard &ndash; Category: Notes</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/on-science-and-engineering.html#on-science-and-engineering">On science and engineering</a></h1>
+    <p>
+      Posted on Fri 27 February 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <blockquote>
+<p>Science: If you know what you are doing, you are doing it wrong.</p>
+<p>Engineering: If you don't know what you are doing, you are doing it wrong</p>
+</blockquote>
+<p style="text-align: right;">
+  Dr. Richard W. Hamming, 1995 "<a title="Hamming, Intro to The Art of Doing Science and Engineering: Learning to Learn (March 28, 1995) " href="https://www.youtube.com/watch?v=AD4b-52jtos&list=PL2FF649D0C4407B30">Learning to learn</a>""
+</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/measuring-succes-of-voice-activity-detection-algorithms-hr0-and-hr1.html#measuring-succes-of-voice-activity-detection-algorithms-hr0-and-hr1">Measuring succes of Voice Activity Detection algorithms. HR0 and HR1</a></h1>
+    <p>
+      Posted on Fri 06 February 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>When measuring the effectiveness of a Voice Activity Detection algorithm (<a href="https://en.wikipedia.org/wiki/Voice_activity_detection" title="Voice Activity Detection on Wikipedia">VAD</a>) looking at 0-1 accuracy is rarely enough. We typically also look at <em>Nonspeech Hit Rate</em> (HR0) and <em>Speech Hit Rate</em> (HR1).</p>
+<ol>
+<li><strong>HR0</strong> is computed as the ratio of the number of correctly detected nonspeech frames to the number of real nonspeech frames.</li>
+<li><strong>HR1</strong> is computed as the ratio of the number of correctly detected speech frames to the number of real speech frames.</li>
+</ol>
+<p style="text-align: right;">
+  <em>Park et al. 2014 [1]</em>
+</p>
+
+<p>Another way to put it is _the percentage of nonspeech and speech frames that are correctly predicted. In Python, this can be calculated in the following way:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">our</span><span class="o">-</span><span class="n">vad</span><span class="o">-</span><span class="n">library</span> <span class="k">as</span> <span class="n">VAD</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">load_targets</span><span class="p">()</span>
+
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">VAD</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Find nonspeech and speech hit rates:</span>
+<span class="n">index0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">index1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">hr0</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_hat</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">hr1</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_hat</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index1</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+
+<p>First we create 2 indexes of y using numpy's <code>where()</code> function (<a title="numpy.where — NumPy v1.9 Manual:" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html">see more</a>). <code>index0</code> is a vector of all the positions of y that represents a silent frame in our data. Say <code>y = [0,0,0,1,1,0]</code>, then <code>index0 = [0,1,2,5]</code>, since <code>y[0] = y[1] = y[2] = y[5] = 0.</code></p>
+<p>this means that</p>
+<div class="highlight"><pre><span></span><span class="k">print</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> 
+<span class="c1"># -&gt; [0,0,0,0]</span>
+</pre></div>
+
+
+<p>Which in and of itself is not interesting. However, we can use the same index to pull out all the predictions in ŷ and compare them to the ground-truth in y</p>
+<div class="highlight"><pre><span></span><span class="n">y_hat</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">index0</span><span class="p">]</span>
+<span class="c1"># -&gt; (True, True, False ... , dtype=bool)</span>
+</pre></div>
+
+
+<p>This gives us a new array of the same dimensions with boolean <code>True</code> or <code>False</code> values. Each <code>True</code> represents a correct prediction and each <code>False</code> an incorrect. A neat python trick is that boolean values are treated as 0 and 1, so we can take the mean of this boolean result array to get the ratio between correct and incorrect prediction using the <code>.mean()</code> function.</p>
+<hr />
+<p>[1] Park, Jinsoo, Wooil Kim, David K. Han, and Hanseok Ko. “Voice Activity Detection in Noisy Environments Based on Double-Combined Fourier Transform and Line Fitting.” <em>The Scientific World Journal</em> 2014 (August 6, 2014): e146040. doi:10.1155/2014/146040.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/quote.html#quote">Quote</a></h1>
+    <p>
+      Posted on Mon 26 January 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <blockquote>
+<p>If [the curse of dimensionality] problem didn't exist, we would use the nearest neighbour averaging as the sole basis for doing estimation.</p>
+</blockquote>
+<p style="text-align: right;">
+  <a href="https://en.wikipedia.org/wiki/Trevor_Hastie">Trevor Hastie</a> from his "Dimensionality and structured models" lecture in his <a href="https://class.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about">Statistical Learning</a> course at Stanford.
+</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/algorithms-sensitivity-to-single-salient-dimension.html#algorithms-sensitivity-to-single-salient-dimension">Algorithms sensitivity to single salient dimension</a></h1>
+    <p>
+      Posted on Fri 23 January 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>I was doing a <em>voice activity detection</em> algorithm and testing my implementation on speech data recorded in a silent room. My first feature was a simple energy level detector, basically giving a number to how high volume each frame of sound contains. Since there was no noise on the recordings, the mere presence of volume explained 93% of the results.</p>
+<p>I decided to ad frequencies to the feature vector. Given that each frame is 80 miliseconds, this makes it possible to calculate the energy of some 40 distinct frequencies. I'd expect the few coughs and breathings that were mistaken as speech to have a different frequency profile and be cut out using this larger dataset. To my surprise, my nearest neighbour classifier improved with a few percentage points, while my SVM plummeted with over 20 points accuracy.</p>
+<p>I realize that the saliency of these ~40 new points are very low, compared to energy-datapoint, but I honestly still expected the SVM to figure this out. And i expected the NN to be much weaker against such an increase in dimensions.</p>
+<p>Puzzled, I decided to conduct an experiment looking at how different classifiers handle additional low-saliency dimensions. In this setup only one dimension is salient, but it will how ever completely explain the data. Meanwhile all other dimensions are completely random noise.</p>
+<p><img alt="" src="assets/2015/01/index.png" /></p>
+<p>You can <a href="http://olsgaard.dk/notes/wp-content/uploads/other_files/Sensitivity_to_single_salient_dimension.ipynb" title="Sensitivity to single salient dimension ipython notebook">download the ipython notebook</a> or <a href="http://nbviewer.ipython.org/url/olsgaard.dk/notes/wp-content/uploads/other_files/Sensitivity_to_single_salient_dimension.ipynb" title="View online in nbviewer">read it online</a>. (warning, the code is <em>very</em> stateful and uses global variables, so be sure to execute things in order)</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/some-notes-on-unicode-and-utf-8-and-its-various-representations.html#some-notes-on-unicode-and-utf-8-and-its-various-representations">Some notes on unicode and UTF-8 and its various representations</a></h1>
+    <p>
+      Posted on Thu 13 November 2014 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>When working with NLP on a wide variety of text, one is bound to encounter various encoding trouble. Even when everything is revolving around unicode, things are not as straightforward as one could hope.</p>
+<p>Here's an example of some trouble with a series of files named by a string representation of the hexadecimal value of the utf-8 unicode codepoint.</p>
+<p>File names:</p>
+<ul>
+<li>E6B7B1.png</li>
+<li>E6B48B.png</li>
+<li>E6B88B.png</li>
+<li>...</li>
+</ul>
+<p>In my case they look something like this:<figure id="attachment_116" style="width: 545px" class="wp-caption aligncenter"></p>
+<p><a href="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png"><img class="wp-image-116 size-full" src="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png" alt="Stroke order diagram for 母" width="545" height="109" srcset="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png 545w, http://olsgaard.dk/notes/wp-content/uploads/2014/11/母-300x60.png 300w" sizes="(max-width: 545px) 100vw, 545px" /></a><figcaption class="wp-caption-text">Stroke order diagram converted to png from the <a href="https://github.com/KanjiVG/kanjivg/tree/master/kanji" title="KanjiVG on Github">KanjiVG project</a></figcaption></figure> </p>
+<p>The problem is to convert these back into unicode, so it is possible for a human to read what the names actually represent. This is easy to do, but difficult to learn how to.</p>
+<p>The file names are UTF-8 hex, not unicode codepoints. <a href="http://www.joelonsoftware.com/articles/Unicode.html" title="The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)">The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)</a> guide has a nice explanation of what is going on here, the important part being this (emphasis mine):</p>
+<blockquote>
+<p>Thus was invented the brilliant concept of UTF-8. UTF-8 was another system for storing your string of Unicode code points, those magic U+ numbers, in memory using 8 bit bytes. In UTF-8, <strong>every code point from 0-127 is stored in a single byte. Only code points 128 and above are stored using 2, 3, in fact, up to 6 bytes.</strong></p>
+</blockquote>
+<p>So what we are seeing are 3 bytes encoded in hexadecimal that refers to some unicode codepoint (which again refers to an actual character)</p>
+<p>In python we can use the string.decode() function to handle these 2 conversions. First we convert the ascii hex representations into actual hex and then we convert the hex numbers into the unicode codepoint that they refer to.</p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt;&gt; &#39;E6B88B&#39;.decode(&#39;hex&#39;).decode(&#39;utf-8&#39;)
+u&#39;\u6e0b&#39;
+&gt;&gt;&gt; print(u&#39;\u6e0b&#39;)
+渋
+</pre></div>
+
+
+<p>My full script is as follows</p>
+<p>The python script:</p>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">@author: Mads Olsgaard, 2014</span>
+
+<span class="s2">Released under BSD3 License.</span>
+
+<span class="s2">This scripts renames .png files that are named with hexadecimal values into their utf-8 string. Assumes the form of A1E2B3.png</span>
+
+<span class="s2">Thanks to user plaes @ http://stackoverflow.com/a/13358677</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s s-Atom">import</span> <span class="s s-Atom">glob</span><span class="p">,</span> <span class="s s-Atom">os</span><span class="p">,</span> <span class="s s-Atom">shutil</span>
+
+<span class="s s-Atom">basepath</span> <span class="o">=</span> <span class="s s-Atom">&#39;../path_to/hex2utf/&#39;</span> <span class="s s-Atom">#folder</span> <span class="s s-Atom">where</span> <span class="s s-Atom">we</span> <span class="s s-Atom">want</span> <span class="s s-Atom">to</span> <span class="s s-Atom">take</span> <span class="s s-Atom">our</span> <span class="s s-Atom">files</span> <span class="s s-Atom">from</span>
+<span class="s s-Atom">targetpath</span> <span class="o">=</span> <span class="s s-Atom">basepath+&#39;out/&#39;</span> <span class="s s-Atom">#</span> <span class="s s-Atom">path</span> <span class="s s-Atom">to</span> <span class="s s-Atom">where</span> <span class="s s-Atom">we</span> <span class="s s-Atom">want</span> <span class="s s-Atom">to</span> <span class="s s-Atom">store</span> <span class="s s-Atom">the</span> <span class="s s-Atom">renamed</span> <span class="s s-Atom">files</span>
+
+<span class="s s-Atom">pattern</span> <span class="o">=</span> <span class="s s-Atom">&#39;??????.png&#39;</span>     <span class="s s-Atom">#</span> <span class="s s-Atom">pattern</span> <span class="s s-Atom">of</span> <span class="s s-Atom">the</span> <span class="s s-Atom">file</span> <span class="s s-Atom">name</span><span class="p">.</span> <span class="nv">In</span> <span class="s s-Atom">this</span> <span class="s s-Atom">case</span> <span class="s s-Atom">we</span> <span class="s s-Atom">are</span> <span class="s s-Atom">only</span> <span class="s s-Atom">looking</span> <span class="s s-Atom">for</span> <span class="mi">6</span> <span class="s s-Atom">character</span> <span class="s s-Atom">long</span> <span class="s s-Atom">file</span> <span class="s s-Atom">names</span> <span class="s s-Atom">of</span> <span class="s s-Atom">the</span> <span class="s s-Atom">png</span> <span class="s s-Atom">type</span><span class="p">.</span>
+                        <span class="s s-Atom">#</span> <span class="nv">These</span> <span class="s s-Atom">are</span> <span class="o">not</span> <span class="s s-Atom">regex</span><span class="p">.</span> <span class="nv">See</span> <span class="nn">https</span><span class="p">:</span><span class="o">//</span><span class="s s-Atom">docs</span><span class="p">.</span><span class="s s-Atom">python</span><span class="p">.</span><span class="s s-Atom">org</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="s s-Atom">library</span><span class="o">/</span><span class="s s-Atom">fnmatch</span><span class="p">.</span><span class="s s-Atom">html</span>
+
+<span class="s s-Atom">filelist</span> <span class="o">=</span> <span class="s s-Atom">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s s-Atom">basepath</span><span class="o">+</span><span class="s s-Atom">pattern</span><span class="p">)</span> <span class="s s-Atom">#load</span> <span class="s s-Atom">all</span> <span class="s s-Atom">files</span> <span class="s s-Atom">in</span> <span class="s s-Atom">basepath</span> <span class="s s-Atom">that</span> <span class="s s-Atom">conform</span> <span class="s s-Atom">to</span> <span class="s s-Atom">pattern</span>
+
+<span class="c1"># Extract the filename from each file path in filelist, truncate the &#39;.png&#39; section</span>
+<span class="c1"># The .decode(&#39;hex&#39;).decode(&#39;utf-8&#39;) part is where the magic happens. First we convert the ASCII string into the hex values it represents</span>
+<span class="c1"># &#39;E6B88B&#39; -&gt; &#39;\xe6\xb8\x8b&#39;</span>
+<span class="c1"># and then we convert the hex-code into the UTF8 unicode character that it represents</span>
+<span class="c1"># &#39;\xe6\xb8\x8b&#39; -&gt; u&#39;\u6e0b&#39;, which in unicode aware applications will show up as &#39;渋&#39;</span>
+
+<span class="s s-Atom">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="s s-Atom">n</span><span class="p">)[:-</span><span class="mi">4</span><span class="p">].</span><span class="nf">decode</span><span class="p">(</span><span class="s s-Atom">&#39;hex&#39;</span><span class="p">).</span><span class="nf">decode</span><span class="p">(</span><span class="s s-Atom">&#39;utf-8&#39;</span><span class="p">)</span> <span class="s s-Atom">for</span> <span class="s s-Atom">n</span> <span class="s s-Atom">in</span> <span class="s s-Atom">filelist</span><span class="p">]</span>
+
+<span class="s s-Atom">for</span> <span class="s s-Atom">n</span><span class="p">,</span><span class="s s-Atom">t</span> <span class="s s-Atom">in</span> <span class="nf">zip</span><span class="p">(</span><span class="s s-Atom">filelist</span><span class="p">,</span> <span class="s s-Atom">filenames</span><span class="p">)</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">shutil</span><span class="p">.</span><span class="nf">copy2</span><span class="p">(</span><span class="s s-Atom">n</span><span class="p">,</span> <span class="s s-Atom">targetpath</span><span class="o">+</span><span class="s s-Atom">t+&#39;.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Some other links worth looking at</p>
+<ul>
+<li><a href="https://docs.python.org/3/howto/unicode.html" title="Unicode HOWTO">Python's Unicode HOWTO</a></li>
+</ul>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn" href="/category/notes5.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
+    <a class="btn float-right" href="/category/notes3.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

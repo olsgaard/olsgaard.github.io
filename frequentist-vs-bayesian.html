@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="Was reading Roger Levy – Probabilistic Models in the Study of Language draft when I got an actual introduction to the words frequentist and bayesian for the first time. It had never daunted on me that there are these two fundamentally different ways of viewing probability and it has been on ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Frequentist vs. Bayesian"/>
+<meta property="og:description" content="Was reading Roger Levy – Probabilistic Models in the Study of Language draft when I got an actual introduction to the words frequentist and bayesian for the first time. It had never daunted on me that there are these two fundamentally different ways of viewing probability and it has been on ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/frequentist-vs-bayesian.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2014-04-13 23:53:35+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Frequentist vs. Bayesian</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="frequentist-vs-bayesian">Frequentist vs. Bayesian</h1>
+    <p>Posted on Sun 13 April 2014 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>Was reading <a href="http://idiom.ucsd.edu/~rlevy/pmsl_textbook/book_draft.pdf">Roger Levy – Probabilistic Models in the Study of Language draft</a> when I got an actual introduction to the words <em>frequentist</em> and  <em>bayesian</em> for the first time. It had never daunted on me that there are these two fundamentally different ways of viewing probability and it has been on my mind ever since.</p>
+<p>Here's the relevant quote:</p>
+<blockquote>
+<p>You and your friend meet at the park for a game of tennis. In order to determine who will serve ﬁrst, you jointly decide to ﬂip a coin. Your friend produces a quarter and tells you that it is a fair coin. What exactly does your friend mean by this?</p>
+<p>A translation of your friend’s statement into the language of probability theory would be that the tossing of the coin is an experiment—a repeatable procedure whose outcome may be uncertain—in which the probability of the coin landing with heads face up is equal to the probability of it landing with tails face up, at 1/2.</p>
+<p>In mathematical notation we would express this translation as P(Heads) = P(Tails) = 1/2.</p>
+<p>This mathematical translation is a partial answer to the question of what probabilities are.</p>
+<p>The translation is not, however, a complete answer to the question of what your friend means, until we give a semantics to statements of probability theory that allows them to be interpreted as pertaining to facts about the world. This is the philosophical problem posed by probability theory.</p>
+<p>Two major classes of answer have been given to this philosophical problem, corresponding to two major schools of thought in the application of probability theory to real problems in the world.</p>
+<p>One school of thought, the frequentist school, considers the probability of an event to denote its limiting, or asymptotic, frequency over an arbitrarily large number of repeated trials. For a frequentist, to say that P(Heads) = 1/2 means that if you were to toss the coin many, many times, the proportion of Heads outcomes would be guaranteed to eventually approach 50%.</p>
+<p>The second, Bayesian school of thought considers the probability of an event E to be a principled measure of the strength of one’s belief that E will result. For a Bayesian, to say that P(Heads) for a fair coin is 0.5 (and thus equal to P(Tails)) is to say that you believe that Heads and Tails are equally likely outcomes if you ﬂip the coin. A popular and slightly more precise variant of Bayesian philosophy frames the interpretation of probabilities in terms of rational betting behavior, deﬁning the probability π that someone ascribes to an event as the maximum amount of money they would be willing to pay for a bet that pays one unit of money. For a fair coin, a rational better would be willing to pay no more than ﬁfty cents for a bet that pays $1 if the coin comes out heads.</p>
+<p>... Fortunately, for the cases in which it makes sense to talk about both reasonable belief and asymptotic frequency, it’s been proven that the two schools of thought lead to the same rules of probability.</p>
+</blockquote>
+<p>I'm having a hard time understanding the Bayesian argument here. The only reason you would want to bet $ 0.49 to win $1 in a 50/50 bet, is if you are able to repeat the bet for a large number of times. Else you are standing to loose $0.49 - and what if that was actually a lof of money to you? In this sense, the idea of betting "no more than fifty cents", is the frequentist idea, that when repeating the bet many times, your winnings will converge to zero or higher.</p>
+<p>However, Levy further refers to a paper by <a href="http://jimbeck.caltech.edu/summerlectures/references/ProbabilityFrequencyReasonableExpectation.pdf" title=" Probability, Frequency and Reasonable Expectation">Cox (1946)</a> which comes with a great counter point to the frequentist view of the world.</p>
+<blockquote>
+<p>... there are probabilities in the sense of reasonable expectation [Bayesian] for which no ensemble exists</p>
+</blockquote>
+<p>Here ensemble are all the drawings from a random distribution - or in the former case a lot of coin tosses. Cox continues:</p>
+<blockquote>
+<p>Thus when the probability is calculated that more than one planetary system exists in the universe, it is barely tenable even as an artifice that this refers to the number of universes, all resembling in some way the universe, which by definition is all-inclusive.</p>
+</blockquote>
+<p>And this is where I feel a paradox starting to creep in. Of course we can make probabilities about situations that cannot be repeated. But on the other hand: If I throw a coin and it turn out heads, wasn't that throw in retrospect certainly a head?</p>
+<p>Does it make sense to talk about the probability of a single, actual outcome, since that outcome is certainly what it was?</p>
+<p>I suppose the answer is, if the world is deterministic, then the frequentist theory of probability doesn't make sense: A coin toss is not 50/50 random outcome. It is an event for which we have insufficient knowledge about to properly predict. And so a bayesien would say: "Given my insufficient knowledge, what should I bet on, and how much?"</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Frequentist vs. Bayesian",
+  "headline": "Frequentist vs. Bayesian",
+  "datePublished": "2014-04-13 23:53:35+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/frequentist-vs-bayesian.html",
+  "description": "Was reading Roger Levy – Probabilistic Models in the Study of Language draft when I got an actual introduction to the words frequentist and bayesian for the first time. It had never daunted on me that there are these two fundamentally different ways of viewing probability and it has been on ..."
+}
+</script></body>
+</html>

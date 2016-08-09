@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="In the In the there are only instruction on how to install on Windows and Linux, but not for OSX, despite the program working quite nicely on Mac. Kousei Ikeda has easy to follow instruction on his Ikekou blog reprinted here in English. MeCab We install from the Terminal, using ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Installing MeCab on OSX"/>
+<meta property="og:description" content="In the In the there are only instruction on how to install on Windows and Linux, but not for OSX, despite the program working quite nicely on Mac. Kousei Ikeda has easy to follow instruction on his Ikekou blog reprinted here in English. MeCab We install from the Terminal, using ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/installing-mecab-on-osx.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-10-08 15:01:14+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Installing MeCab on OSX</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="installing-mecab-on-osx">Installing MeCab on OSX</h1>
+    <p>Posted on Thu 08 October 2015 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>In the <a href="http://taku910.github.io/mecab/">In the</a> there are only instruction on how to install on Windows and Linux, but not for OSX, despite the program working quite nicely on Mac.</p>
+<p>Kousei Ikeda has easy to follow instruction on his <a href="http://ikekou.jp/blog/archives/2736">Ikekou blog</a> reprinted here in English.</p>
+<h2>MeCab</h2>
+<p>We install from the Terminal, using the following commands:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/Downloads
+$ curl -O https://mecab.googlecode.com/files/mecab-0.996.tar.gz
+$ tar zxfv mecab-0.996.tar.gz
+$ <span class="nb">cd</span> mecab-0.996
+$ ./configure
+$ make
+$ make check
+</pre></div>
+
+
+<p>This downloads the source from Google Code, unpacks it and compile and check compilation.</p>
+<h2>IPADIC</h2>
+<p>Next we need to install a dictionary file / language model for MeCab. The recommended model is IPADIC.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/Downloads
+$ $ curl -O https://mecab.googlecode.com/files/mecab-ipadic-2.7.0-20070801.tar.gz
+$ tar zxfv mecab-ipadic-2.7.0-20070801.tar.gz
+$ <span class="nb">cd</span> mecab-ipadic-2.7.0-20070801
+$ ./configure --with-charset<span class="o">=</span>utf8
+$ make
+$ sudo make install
+</pre></div>
+
+
+<p>This downloads the source code, unpacks it and compiles the dictionary using UTF-8 character encoding.</p>
+<p>Note that the above code downloads from googlecode.com, which is deprecated. The project is inaccessible from Google code and is currently hosted on Github (<a href="https://github.com/taku910/mecab">here</a>) so it is uncertain how long the zipped source will be available there.</p>
+<p>Check the <a href="http://taku910.github.io/mecab/#download">download section of the documentation</a> for links to the currently newest version of both IPADIC and MeCab.</p>
+<p>After this is done you can use pip to install MeCab bindings for python like this:</p>
+<div class="highlight"><pre><span></span>$ pip install mecab-python3
+</pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Installing MeCab on OSX",
+  "headline": "Installing MeCab on OSX",
+  "datePublished": "2015-10-08 15:01:14+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/installing-mecab-on-osx.html",
+  "description": "In the In the there are only instruction on how to install on Windows and Linux, but not for OSX, despite the program working quite nicely on Mac. Kousei Ikeda has easy to follow instruction on his Ikekou blog reprinted here in English. MeCab We install from the Terminal, using ..."
+}
+</script></body>
+</html>

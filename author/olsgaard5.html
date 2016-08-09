@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard &ndash; Posts by: Olsgaard</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/some-notes-on-unicode-and-utf-8-and-its-various-representations.html#some-notes-on-unicode-and-utf-8-and-its-various-representations">Some notes on unicode and UTF-8 and its various representations</a></h1>
+    <p>
+      Posted on Thu 13 November 2014 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>When working with NLP on a wide variety of text, one is bound to encounter various encoding trouble. Even when everything is revolving around unicode, things are not as straightforward as one could hope.</p>
+<p>Here's an example of some trouble with a series of files named by a string representation of the hexadecimal value of the utf-8 unicode codepoint.</p>
+<p>File names:</p>
+<ul>
+<li>E6B7B1.png</li>
+<li>E6B48B.png</li>
+<li>E6B88B.png</li>
+<li>...</li>
+</ul>
+<p>In my case they look something like this:<figure id="attachment_116" style="width: 545px" class="wp-caption aligncenter"></p>
+<p><a href="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png"><img class="wp-image-116 size-full" src="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png" alt="Stroke order diagram for 母" width="545" height="109" srcset="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png 545w, http://olsgaard.dk/notes/wp-content/uploads/2014/11/母-300x60.png 300w" sizes="(max-width: 545px) 100vw, 545px" /></a><figcaption class="wp-caption-text">Stroke order diagram converted to png from the <a href="https://github.com/KanjiVG/kanjivg/tree/master/kanji" title="KanjiVG on Github">KanjiVG project</a></figcaption></figure> </p>
+<p>The problem is to convert these back into unicode, so it is possible for a human to read what the names actually represent. This is easy to do, but difficult to learn how to.</p>
+<p>The file names are UTF-8 hex, not unicode codepoints. <a href="http://www.joelonsoftware.com/articles/Unicode.html" title="The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)">The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)</a> guide has a nice explanation of what is going on here, the important part being this (emphasis mine):</p>
+<blockquote>
+<p>Thus was invented the brilliant concept of UTF-8. UTF-8 was another system for storing your string of Unicode code points, those magic U+ numbers, in memory using 8 bit bytes. In UTF-8, <strong>every code point from 0-127 is stored in a single byte. Only code points 128 and above are stored using 2, 3, in fact, up to 6 bytes.</strong></p>
+</blockquote>
+<p>So what we are seeing are 3 bytes encoded in hexadecimal that refers to some unicode codepoint (which again refers to an actual character)</p>
+<p>In python we can use the string.decode() function to handle these 2 conversions. First we convert the ascii hex representations into actual hex and then we convert the hex numbers into the unicode codepoint that they refer to.</p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt;&gt; &#39;E6B88B&#39;.decode(&#39;hex&#39;).decode(&#39;utf-8&#39;)
+u&#39;\u6e0b&#39;
+&gt;&gt;&gt; print(u&#39;\u6e0b&#39;)
+渋
+</pre></div>
+
+
+<p>My full script is as follows</p>
+<p>The python script:</p>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">@author: Mads Olsgaard, 2014</span>
+
+<span class="s2">Released under BSD3 License.</span>
+
+<span class="s2">This scripts renames .png files that are named with hexadecimal values into their utf-8 string. Assumes the form of A1E2B3.png</span>
+
+<span class="s2">Thanks to user plaes @ http://stackoverflow.com/a/13358677</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s s-Atom">import</span> <span class="s s-Atom">glob</span><span class="p">,</span> <span class="s s-Atom">os</span><span class="p">,</span> <span class="s s-Atom">shutil</span>
+
+<span class="s s-Atom">basepath</span> <span class="o">=</span> <span class="s s-Atom">&#39;../path_to/hex2utf/&#39;</span> <span class="s s-Atom">#folder</span> <span class="s s-Atom">where</span> <span class="s s-Atom">we</span> <span class="s s-Atom">want</span> <span class="s s-Atom">to</span> <span class="s s-Atom">take</span> <span class="s s-Atom">our</span> <span class="s s-Atom">files</span> <span class="s s-Atom">from</span>
+<span class="s s-Atom">targetpath</span> <span class="o">=</span> <span class="s s-Atom">basepath+&#39;out/&#39;</span> <span class="s s-Atom">#</span> <span class="s s-Atom">path</span> <span class="s s-Atom">to</span> <span class="s s-Atom">where</span> <span class="s s-Atom">we</span> <span class="s s-Atom">want</span> <span class="s s-Atom">to</span> <span class="s s-Atom">store</span> <span class="s s-Atom">the</span> <span class="s s-Atom">renamed</span> <span class="s s-Atom">files</span>
+
+<span class="s s-Atom">pattern</span> <span class="o">=</span> <span class="s s-Atom">&#39;??????.png&#39;</span>     <span class="s s-Atom">#</span> <span class="s s-Atom">pattern</span> <span class="s s-Atom">of</span> <span class="s s-Atom">the</span> <span class="s s-Atom">file</span> <span class="s s-Atom">name</span><span class="p">.</span> <span class="nv">In</span> <span class="s s-Atom">this</span> <span class="s s-Atom">case</span> <span class="s s-Atom">we</span> <span class="s s-Atom">are</span> <span class="s s-Atom">only</span> <span class="s s-Atom">looking</span> <span class="s s-Atom">for</span> <span class="mi">6</span> <span class="s s-Atom">character</span> <span class="s s-Atom">long</span> <span class="s s-Atom">file</span> <span class="s s-Atom">names</span> <span class="s s-Atom">of</span> <span class="s s-Atom">the</span> <span class="s s-Atom">png</span> <span class="s s-Atom">type</span><span class="p">.</span>
+                        <span class="s s-Atom">#</span> <span class="nv">These</span> <span class="s s-Atom">are</span> <span class="o">not</span> <span class="s s-Atom">regex</span><span class="p">.</span> <span class="nv">See</span> <span class="nn">https</span><span class="p">:</span><span class="o">//</span><span class="s s-Atom">docs</span><span class="p">.</span><span class="s s-Atom">python</span><span class="p">.</span><span class="s s-Atom">org</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="s s-Atom">library</span><span class="o">/</span><span class="s s-Atom">fnmatch</span><span class="p">.</span><span class="s s-Atom">html</span>
+
+<span class="s s-Atom">filelist</span> <span class="o">=</span> <span class="s s-Atom">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s s-Atom">basepath</span><span class="o">+</span><span class="s s-Atom">pattern</span><span class="p">)</span> <span class="s s-Atom">#load</span> <span class="s s-Atom">all</span> <span class="s s-Atom">files</span> <span class="s s-Atom">in</span> <span class="s s-Atom">basepath</span> <span class="s s-Atom">that</span> <span class="s s-Atom">conform</span> <span class="s s-Atom">to</span> <span class="s s-Atom">pattern</span>
+
+<span class="c1"># Extract the filename from each file path in filelist, truncate the &#39;.png&#39; section</span>
+<span class="c1"># The .decode(&#39;hex&#39;).decode(&#39;utf-8&#39;) part is where the magic happens. First we convert the ASCII string into the hex values it represents</span>
+<span class="c1"># &#39;E6B88B&#39; -&gt; &#39;\xe6\xb8\x8b&#39;</span>
+<span class="c1"># and then we convert the hex-code into the UTF8 unicode character that it represents</span>
+<span class="c1"># &#39;\xe6\xb8\x8b&#39; -&gt; u&#39;\u6e0b&#39;, which in unicode aware applications will show up as &#39;渋&#39;</span>
+
+<span class="s s-Atom">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="s s-Atom">n</span><span class="p">)[:-</span><span class="mi">4</span><span class="p">].</span><span class="nf">decode</span><span class="p">(</span><span class="s s-Atom">&#39;hex&#39;</span><span class="p">).</span><span class="nf">decode</span><span class="p">(</span><span class="s s-Atom">&#39;utf-8&#39;</span><span class="p">)</span> <span class="s s-Atom">for</span> <span class="s s-Atom">n</span> <span class="s s-Atom">in</span> <span class="s s-Atom">filelist</span><span class="p">]</span>
+
+<span class="s s-Atom">for</span> <span class="s s-Atom">n</span><span class="p">,</span><span class="s s-Atom">t</span> <span class="s s-Atom">in</span> <span class="nf">zip</span><span class="p">(</span><span class="s s-Atom">filelist</span><span class="p">,</span> <span class="s s-Atom">filenames</span><span class="p">)</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">shutil</span><span class="p">.</span><span class="nf">copy2</span><span class="p">(</span><span class="s s-Atom">n</span><span class="p">,</span> <span class="s s-Atom">targetpath</span><span class="o">+</span><span class="s s-Atom">t+&#39;.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Some other links worth looking at</p>
+<ul>
+<li><a href="https://docs.python.org/3/howto/unicode.html" title="Unicode HOWTO">Python's Unicode HOWTO</a></li>
+</ul>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/basics-of-kana-kanji-conversion.html#basics-of-kana-kanji-conversion">Basics of Kana-kanji conversion</a></h1>
+    <p>
+      Posted on Tue 04 November 2014 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>A kana/kanji conversion system goal is to convert a string of phonetical characters &#8211; kana &#8211; into a string of mixed logographic kanji and phonetic kana. That is, we want to go from ごはんをたべます →ご飯を食べます (To eat a meal).</p>
+<p>Let $W$ be a set of words ${w_1, w_2 ... w_n}$ in a sentence (in the above example W would be ご飯を食べます). $P(W)$ is the probability that this sentence exists in the language. In practice that is, how many times does this exact sentence show up in our training data. Since very few sentences show up in written language more than once, the chance that we will deal with a sentence that does not exist in our training set is quite high. Therefore we tend to let $W$ be a collection of uni, bi, and trigrams and their associated frequenzy. $P(W)$ is also known as our <a href="http://en.wikipedia.org/wiki/Language_model">language model</a>.</p>
+<p>Let $A$ be a string of phonetic characters &#8211; or kana &#8211; so that $A = {a_1, a_2 ... a_m}$.</p>
+<p>Now we want to find the most probable string $W$ associated with the input string $A$.</p>
+<p>A classic example is きしゃのきしゃがきしゃのきしゃできしゃした which we typically want to <a href="assets/2014/11/240px-IlkhanidHorseArcher.jpg"></a>be 貴社の記者が貴社の汽車で帰社した (Your reporter was sent home in your train). Given that all the nouns in the phrase is pronounced きしゃ(kisha) this leads to a large variety of more or less meaningful, but still possible sentences. The reporter could be sent home in the reporters own train, or the train could be sent home on the reporter. The reporter or train could even be involved in <a href="http://ja.wikipedia.org/wiki/%E9%A8%8E%E5%B0%84">mounted archery</a> (騎射 also read きしゃ) if one is imaginative enough. However entertaining that may be, it is the job of our kana-kanji converter to convert to the most likely sentence, not the most entertaining.</p>
+<p>Using Bayes theorem we can ask <em>What is the probability of an observed kana string A, given a sentence W?</em></p>
+<p>$$P(W|A) = \frac{P(A|W)P(W)}{P(A)} $$</p>
+<p style="text-align: right;">
+  [1]
+</p>
+
+<p>And we want to find the W that maximizes this probability, so that $W^* = arg_wmaxP(W|A) =  arg_wmax\frac{P(A|W)P(W)}{P(A)}$</p>
+<p>We tend to assume that users will correctly type the kana input that they intend to type. That is, there are no typos and there are no spelling mistakes (note the general absence of Japanese spellcheckers in the market place). So we can assume that $P(A) = 1$.</p>
+<p>We can make a few more assumptions about the Japanese language. For example, if we have a sentence W, then we can be very certain that there is only 1 kana string A that fits. ご飯を食べます can only be read ごはんをたべます in basically any circumstance that we would come across. So $P(A|W)=1$, for most sentence and we can further reduce [1] to $$P(W|A) = P(W) $$ or to put it in a different way, the most likely correct sentence is completely dependent on the language model ((Suzuki, Hisami, and Jianfeng Gao. Microsoft Research IME Corpus. Microsoft Research Technical Report, 2005. <a href="http://131.107.65.14/pubs/70243/tr-2005-168.pdf.">http://131.107.65.14/pubs/70243/tr-2005-168.pdf.</a></p>
+<p>)).</p>
+<h2>Caveats</h2>
+<p>However, things are not always as simple as described above.</p>
+<h3>Input string A and P(A)</h3>
+<p>We assume input to be a string of phonetic character representations that we must convert into an actual sentence, very much like how we would do in a text-speech system. However, to complicate matters, both input and output strings will often contain alphanumeric characters as well as punctuation. Some of these &#8211; such as numbers &#8211; may have an effect on how conversion of following kana must be done, others characters &#8211; mostly alphabet characters &#8211; will not and it might be best to ignore such characters during conversion, especially if we suspect the user to input very creative <a href="http://en.wikipedia.org/wiki/Emoticon">emoticon</a> that we haven't met in the training data. However, we may want to substitute single width alphabet to double width and we may or may not want to convert alphabet into kana.</p>
+<p>Moreover, we assume the user to type correctly. There appears to be very little research into what kind of spelling mistakes Japanese writers tend to make when typing Japanese on a keyboard or smartphone. There exist research on the errors people make when writing by hand or when typing English, but it appears to be silently assumed by academics that Japanese authors type correctly. It does seem unlikely, though, that Japanese writers never forget to add a ” or make a や or a ゆ small. A literature search only found 1 paper dealing with proofing written Japanese ((Takeda, Koichi, Emiko Suzuki, Tetsuro Nishino, and Tetsunosuke Fujisaki. “CRITAC—An Experimental System for Japanese Text Proofreading.” IBM Journal of Research and Development 32, no. 2 (1988): 201–16.</p>
+<p>)), while more research appears to have gone into how Japanese writers misspell English text ((Ishikawa, Masahiko. Apparatus for Correcting Misspelling and Incorrect Usage of Word. Google Patents, 1998. <a href="http://www.google.com/patents/US5812863.">http://www.google.com/patents/US5812863.</a></p>
+<p>Mitton, Roger, and Takeshi Okada. “The Adaptation of an English Spellchecker for Japanese Writers,” 2007. <a href="http://eprints.bbk.ac.uk/592.">http://eprints.bbk.ac.uk/592.</a></p>
+<p>)).</p>
+<p>**</p>
+<p>So in the real world, $P(A) \ne 1$**</p>
+<h3>Unambiguity of the reading of a known sentence</h3>
+<p>Earlier I described how we can assume $P(A|W) = 1$. This is an important assumption for a lot of practical reasons. Mainly, because training data is expensive to annotate, but with this assumption we can annotate training data with kana readings <em>automatically</em>, without human intervention. This is how Baidu ((Wu, Xianchao, Rixin Xiao, and Xiaoxin Chen. “Using the Web to Train a Mobile Device Oriented Japanese Input Method Editor,” 2013. <a href="http://www.aclweb.org/anthology/I/I13/I13-1172.pdf.">http://www.aclweb.org/anthology/I/I13/I13-1172.pdf.</a></p>
+<p>)) is able to build a 2.5 terabyte training corpus from the web. This would be impossible to annotate by hand.</p>
+<p>But the readings of a Japanese sentence <em>is</em> ambiguous at times. 今日 can in basically every instance it occurs in Japanese be read either きょう or こんにち, with the latter being too polite for most occasions, but still a possibility. If we expand the earlier example sentence to 私はご飯を食べます (I eat a  meal) it is impossible to deduce if the author meant to use the very polite わたくし or the normal わたし. Given that most automated will convert 私 into わたし we get a self reenforcing that the shorter form should be used.</p>
+<p><strong>So in the real world, $P(A|W) \ne 1$</strong></p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/bell-curves-normal-distributions-and-gaussians.html#bell-curves-normal-distributions-and-gaussians">Bell curves, normal distributions and Gaussians</a></h1>
+    <p>
+      Posted on Mon 27 October 2014 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <blockquote>
+<p>While it is much better to refer to such a curve as a ‘normal distribution' than as a ‘bell curve,' if you really want to fit into the Statistical NLP or pattern recognition communities, you should instead learn to refer to these functions as Gaussians, and to remark things like, ‘Maybe we could model that using 3 Gaussians' at appropriate moments.'</p>
+</blockquote>
+<p style="text-align: right;">
+  &#8211; Foundations of Statistical Natural Language Processing
+</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/showing-japanese-characters-in-matplotlib-on-ubuntu.html#showing-japanese-characters-in-matplotlib-on-ubuntu">Showing Japanese characters in Matplotlib on Ubuntu</a></h1>
+    <p>
+      Posted on Mon 27 October 2014 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>TL;DR: <em>Install Japanese language support and insert the following in your python script</em></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;TakaoPGothic&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<hr />
+<p>If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs that in one way or another includes Japanese characters.</p>
+<p>Below is a graph showing Zipf's Law for the distribution of characters used in [TL;DR: <em>Install Japanese language support and insert the following in your python script</em></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;TakaoPGothic&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<hr />
+<p>If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs that in one way or another includes Japanese characters.</p>
+<p>Below is a graph showing Zipf's Law for the distribution of characters used in](http://en.wikipedia.org/wiki/Tetsuko_Kuroyanagi) &#8216;Totto Channel', the sequel to her famous <a href="en.wikipedia.org/wiki/Totto-Chan:_The_Little_Girl_at_the_Window">&#8220;Totto Chan: The little girl by the window&#8221;</a>.<figure id="attachment_68" style="width: 300px" class="wp-caption aligncenter"></p>
+<p><img alt="" src="assets/2014/10/tottochannel_nojap-300x225.png" /></p>
+<p>Character Distribution of 100 most used characters - but which ones?</figcaption></p>
+<p>On most systems, Matplotlib will not be able to display Japanese characters out-of-the-box and this is a big problem as the graph above is completely useless for even the most basic investigation.</p>
+<p>I've tested on OSX, Windows 8 and Ubuntu and only OSX manages to work out of the box, despite my Windows installation being Japanese!</p>
+<p><a href="http://stackoverflow.com/questions/10960463/non-ascii-characters-in-matplotlib">Most</a> <a href="http://stackoverflow.com/questions/2406700/accented-characters-in-matplotlib">advice</a> online will tell you to change the font used by Matplotlib, but if you are on Ubuntu it might not be completely obvious which font you need to use! Moreover there are many ways to change the font.</p>
+<p>I've found the simplest way of changing fonts to simply be using <a href="http://matplotlib.org/users/customizing.html#dynamic-rc-settings">matplotlib.rc</a></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;Monospace&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>In family you can either insert the name of a font family (as in the above example) or you can name a specific font, which is what you want to do in this case. But which one? I wrote the following script to help check which fonts will work.</p>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Matplotlib font checker</span>
+<span class="sd">Prints a figure displaying a variety of system fonts and their ability to produce Japanese text</span>
+
+<span class="sd">@author: Mads Olsgaard, 2014</span>
+
+<span class="sd">Released under BSD License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
+
+<span class="n">fonts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Droid Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Vera&#39;</span><span class="p">,</span> <span class="s1">&#39;TakaoGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;TakaoPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Liberation Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span> <span class="s1">&#39;FreeSans&#39;</span><span class="p">,</span> <span class="s1">&#39;Droid Sans Japanese&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">]</span>
+<span class="c1">#fonts = [&#39;Arial&#39;, &#39;Times New Roman&#39;, &#39;Helvetica&#39;] #uncomment this line on Windows and see if it helps!</span>
+<span class="n">english</span> <span class="o">=</span> <span class="s1">&#39;The quick ...&#39;</span>
+<span class="n">japanese</span> <span class="o">=</span> <span class="s1">&#39;日本語&#39;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Buils headline</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;japanese&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s1">&#39;Font name&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">-=</span><span class="mf">0.1</span>
+
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fonts</span><span class="p">:</span>
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">english</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">japanese</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">-=</span> <span class="mf">0.1</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">findfont</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>  <span class="c1"># Sanity check. Prints the location of the font. If the font it not found, an error message is printed and the location of the fallback font is shown</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p>On ubuntu the output should be the following:</p>
+<pre>Droid Sans /usr/share/fonts/truetype/droid/DroidSans.ttf
+Vera /home/supermads/anaconda3/lib/python3.4/site-packages/matplotlib/mpl-data/fonts/ttf/Vera.ttf
+TakaoGothic /usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf
+TakaoPGothic /usr/share/fonts/truetype/takao-gothic/TakaoPGothic.ttf
+Liberation Sans /usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf
+ubuntu /usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf
+FreeSans /usr/share/fonts/truetype/freefont/FreeSans.ttf
+Droid Sans Japanese /usr/share/fonts/truetype/droid/DroidSansJapanese.ttf
+DejaVu Sans /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+</pre>
+
+<p>As you can see, I'm running Anaconda Python 3, and if Anaconda can't find a font it will fallback into it's own folder to load the Vera font.</p>
+<p><img alt="" src="assets/2014/10/fontcheck.png" /></p>
+<p>Surprisingly, Droid does support Japanese, it just saves the Japanese character space in a seperate font file, rendering it useless for this purpose. However, the Takao font family does work for our purpose.</p>
+<p>Takao fonts should be installed by default if you have set your location somewhere in Japan during installation of Ubuntu or if you have installed support for Japanese language in <em>System Settings</em> → <em>Language Support</em> (just hit the super key and search for language). I recommend this, since this will also <a href="http://moritzmolch.com/1453">install the Japanese input method</a>, <a href="http://en.wikipedia.org/wiki/Anthy">Anthy</a></p>
+<p>You can also use apt-get, like this from the command line (not tested):</p>
+<pre>sudo apt-get install fonts-takao-mincho fonts-takao-gothic fonts-takao-pgothic
+</pre>
+
+<p>And now we can finally see which characters Kuronayagi used the most for her sequel:</p>
+<p><img alt="" src="assets/2014/10/tottochannel_wjap-1024x348.png" /></p>
+<p>And apparently, that's the Japanese comma, also called <a href="http://ja.wikipedia.org/wiki/%E8%AA%AD%E7%82%B9">読点</a></p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/frequentist-vs-bayesian.html#frequentist-vs-bayesian">Frequentist vs. Bayesian</a></h1>
+    <p>
+      Posted on Sun 13 April 2014 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>Was reading <a href="http://idiom.ucsd.edu/~rlevy/pmsl_textbook/book_draft.pdf">Roger Levy – Probabilistic Models in the Study of Language draft</a> when I got an actual introduction to the words <em>frequentist</em> and  <em>bayesian</em> for the first time. It had never daunted on me that there are these two fundamentally different ways of viewing probability and it has been on my mind ever since.</p>
+<p>Here's the relevant quote:</p>
+<blockquote>
+<p>You and your friend meet at the park for a game of tennis. In order to determine who will serve ﬁrst, you jointly decide to ﬂip a coin. Your friend produces a quarter and tells you that it is a fair coin. What exactly does your friend mean by this?</p>
+<p>A translation of your friend’s statement into the language of probability theory would be that the tossing of the coin is an experiment—a repeatable procedure whose outcome may be uncertain—in which the probability of the coin landing with heads face up is equal to the probability of it landing with tails face up, at 1/2.</p>
+<p>In mathematical notation we would express this translation as P(Heads) = P(Tails) = 1/2.</p>
+<p>This mathematical translation is a partial answer to the question of what probabilities are.</p>
+<p>The translation is not, however, a complete answer to the question of what your friend means, until we give a semantics to statements of probability theory that allows them to be interpreted as pertaining to facts about the world. This is the philosophical problem posed by probability theory.</p>
+<p>Two major classes of answer have been given to this philosophical problem, corresponding to two major schools of thought in the application of probability theory to real problems in the world.</p>
+<p>One school of thought, the frequentist school, considers the probability of an event to denote its limiting, or asymptotic, frequency over an arbitrarily large number of repeated trials. For a frequentist, to say that P(Heads) = 1/2 means that if you were to toss the coin many, many times, the proportion of Heads outcomes would be guaranteed to eventually approach 50%.</p>
+<p>The second, Bayesian school of thought considers the probability of an event E to be a principled measure of the strength of one’s belief that E will result. For a Bayesian, to say that P(Heads) for a fair coin is 0.5 (and thus equal to P(Tails)) is to say that you believe that Heads and Tails are equally likely outcomes if you ﬂip the coin. A popular and slightly more precise variant of Bayesian philosophy frames the interpretation of probabilities in terms of rational betting behavior, deﬁning the probability π that someone ascribes to an event as the maximum amount of money they would be willing to pay for a bet that pays one unit of money. For a fair coin, a rational better would be willing to pay no more than ﬁfty cents for a bet that pays $1 if the coin comes out heads.</p>
+<p>... Fortunately, for the cases in which it makes sense to talk about both reasonable belief and asymptotic frequency, it’s been proven that the two schools of thought lead to the same rules of probability.</p>
+</blockquote>
+<p>I'm having a hard time understanding the Bayesian argument here. The only reason you would want to bet $ 0.49 to win $1 in a 50/50 bet, is if you are able to repeat the bet for a large number of times. Else you are standing to loose $0.49 - and what if that was actually a lof of money to you? In this sense, the idea of betting "no more than fifty cents", is the frequentist idea, that when repeating the bet many times, your winnings will converge to zero or higher.</p>
+<p>However, Levy further refers to a paper by <a href="http://jimbeck.caltech.edu/summerlectures/references/ProbabilityFrequencyReasonableExpectation.pdf" title=" Probability, Frequency and Reasonable Expectation">Cox (1946)</a> which comes with a great counter point to the frequentist view of the world.</p>
+<blockquote>
+<p>... there are probabilities in the sense of reasonable expectation [Bayesian] for which no ensemble exists</p>
+</blockquote>
+<p>Here ensemble are all the drawings from a random distribution - or in the former case a lot of coin tosses. Cox continues:</p>
+<blockquote>
+<p>Thus when the probability is calculated that more than one planetary system exists in the universe, it is barely tenable even as an artifice that this refers to the number of universes, all resembling in some way the universe, which by definition is all-inclusive.</p>
+</blockquote>
+<p>And this is where I feel a paradox starting to creep in. Of course we can make probabilities about situations that cannot be repeated. But on the other hand: If I throw a coin and it turn out heads, wasn't that throw in retrospect certainly a head?</p>
+<p>Does it make sense to talk about the probability of a single, actual outcome, since that outcome is certainly what it was?</p>
+<p>I suppose the answer is, if the world is deterministic, then the frequentist theory of probability doesn't make sense: A coin toss is not 50/50 random outcome. It is an event for which we have insufficient knowledge about to properly predict. And so a bayesien would say: "Given my insufficient knowledge, what should I bet on, and how much?"</p>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn" href="/author/olsgaard6.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
+    <a class="btn float-right" href="/author/olsgaard4.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

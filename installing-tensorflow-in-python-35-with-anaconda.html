@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="Since the release of Tensorflow 0.6, support for Python 3.3+ has finally been added. However, if you are trying to install Tensorflow into an Anaconda install with conda you might just be using this command that is floating around the web: # Old tensorflow version $ conda install -c https ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Installing Tensorflow in Python 3.5 with Anaconda"/>
+<meta property="og:description" content="Since the release of Tensorflow 0.6, support for Python 3.3+ has finally been added. However, if you are trying to install Tensorflow into an Anaconda install with conda you might just be using this command that is floating around the web: # Old tensorflow version $ conda install -c https ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/installing-tensorflow-in-python-35-with-anaconda.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-01-29 16:34:27+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Installing Tensorflow in Python 3.5 with Anaconda</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="installing-tensorflow-in-python-35-with-anaconda">Installing Tensorflow in Python 3.5 with Anaconda</h1>
+    <p>Posted on Fri 29 January 2016 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>Since the release of Tensorflow 0.6, support for Python 3.3+ has finally been added.</p>
+<p>However, if you are trying to install Tensorflow into an Anaconda install with <code>conda</code> you might just be using this command that is floating around the web:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Old tensorflow version</span>
+$ conda install -c https://conda.anaconda.org/jjhelmus tensorflow
+</pre></div>
+
+
+<p>However, this is a packaged version of Tensorflow 0.5, and <strong>won't run on Python 3.3+</strong></p>
+<p>Instead you can install via pip into your Anaconda installation. Activate the environment you want to install into, or just install into root, and then use the following commands:</p>
+<div class="highlight"><pre><span></span>$ sudo easy_install --upgrade six
+$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.0-py3-none-any.whl
+</pre></div>
+
+
+<p>In the official documentation [1] they link to <em>...tensorflow-0.<strong>5</strong>.0-py<strong>2</strong>-none-any.whl</em>, which is an older version of tensorflow for python 2.x. At the time of writing the newest version is 0.7, so I just manually updated the numbers in the URL to fetch and install the version I want.</p>
+<p>On OSX El Capitan, with Anaconda 2.5 the above <em>does</em> throw an exception, but the exception happens late enough in the install script that tensoflow will be installed once done. I suppose this is part of working with pre-1.0 release software.</p>
+<p>Before installing tensorflow, consider updating your anaconda installation, by running</p>
+<div class="highlight"><pre><span></span>$ conda update anaconda
+</pre></div>
+
+
+<p>[1] <a href="https://www.tensorflow.org/versions/0.6.0/get_started/os_setup.html#pip_install">https://www.tensorflow.org/versions/0.6.0/get_started/os_setup.html#pip_install</a></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Installing Tensorflow in Python 3.5 with Anaconda",
+  "headline": "Installing Tensorflow in Python 3.5 with Anaconda",
+  "datePublished": "2016-01-29 16:34:27+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/installing-tensorflow-in-python-35-with-anaconda.html",
+  "description": "Since the release of Tensorflow 0.6, support for Python 3.3+ has finally been added. However, if you are trying to install Tensorflow into an Anaconda install with conda you might just be using this command that is floating around the web: # Old tensorflow version $ conda install -c https ..."
+}
+</script></body>
+</html>

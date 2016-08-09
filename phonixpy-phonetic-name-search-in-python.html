@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="ICL, good morning! Good morning, my name is George Parson. I’m looking for one of your employees, Philip Carlquist from Engsboda. Let me see, Filip Karlkvist you said ... no, I’m sorry I can’t find anybody here with that name. I’ll just look up the location, ... Ängsboda ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="'Phonix.py – phonetic name search in Python'"/>
+<meta property="og:description" content="ICL, good morning! Good morning, my name is George Parson. I’m looking for one of your employees, Philip Carlquist from Engsboda. Let me see, Filip Karlkvist you said ... no, I’m sorry I can’t find anybody here with that name. I’ll just look up the location, ... Ängsboda ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/phonixpy-phonetic-name-search-in-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-03-24 17:33:34+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; 'Phonix.py – phonetic name search in Python'</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="phonixpy-phonetic-name-search-in-python">'Phonix.py &#8211; phonetic name search in Python'</h1>
+    <p>Posted on Tue 24 March 2015 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <blockquote>
+<ul>
+<li>
+<p>ICL, good morning!</p>
+</li>
+<li>
+<p>Good morning, my name is George Parson. I’m looking for one of your employees, Philip Carlquist from Engsboda.</p>
+</li>
+<li>
+<p>Let me see, Filip Karlkvist you said ... no, I’m sorry I can’t find anybody here with that name. I’ll just look up the location, ... Ängsboda, no, we don’t even seem to have an office there. Are you sure he works for ICL sir?</p>
+</li>
+<li>
+<p>Quite sure. I met him only last week.</p>
+</li>
+<li>
+<p>Well, I’m sorry, he is not in the computer, he must have left the company since.</p>
+</li>
+<li>
+<p>But ...</p>
+</li>
+</ul>
+</blockquote>
+<p>Looking up names can be difficult, because there are many possible ways to spell otherwise similar sounding names and places and we can't expect the user to know of - or even think to try - all possible spellings.</p>
+<p>Phonetic search algorithms dates back to the early 1900 when Russel &amp; Odell invented the Soundex algorithm in order to <em>simplify and improve an index wherein names are to be entered and grouped phonetically rather than in accordance with the alphabetical construction of the names (<a href="http://www.google.com/patents/US1435663" title="Patent file of Soundex, 1918">Patent 1918</a>).</em></p>
+<p>Soundex grew to fame when it was later used for an genealogical analysis of the US Census data from 1890-1920. Today, despite its limitation it is found everywhere from SQL to The Art of Computer Programming.</p>
+<p>The algorithm splits all letters in a name into 1 of 8 groups, each represented by a number 0-7. All zeros and consecutive numbers are pruned. The first letter of the original name is reinstated, and if result is less than 4 characters long, it is extended by zeros.</p>
+<p>Not content with the obvious short comings of this approach, T. N. Gadd sat down and painstakingly constructed no less than 160 rules for how to change the spelling of names to be more phonetic. He also optimized the grouping and published the new resulting algorithm, Phonix, in 1988's 3rd number of'Information System', under the catching title: "Fisching Fore Werds", which if run through the Phonix algorithm would produce the same result as "Fishing for words".</p>
+<p>Since the Phonix algorithm is at the heart of several more advanced phonetic search algorithms, and there exists no live open implementation of it, I decided to reimplement it in Python and release it publicly under BSD.</p>
+<ul>
+<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/Phonix_implementation.ipynb" title="Right-click &gt; Download, to save the iPython Notebook">Download the iPython notebook and play with the algorithm yourself.</a></li>
+<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/phonix.py" title="Right-click &gt; Download, to save the python script">Download the python script and use it in a project</a></li>
+</ul>
+<p>Or</p>
+<ul>
+<li><a href="https://github.com/olsgaard/phonetic_search" title="Github repository">Fork it on Github!</a></li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "'Phonix.py – phonetic name search in Python'",
+  "headline": "'Phonix.py – phonetic name search in Python'",
+  "datePublished": "2015-03-24 17:33:34+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/phonixpy-phonetic-name-search-in-python.html",
+  "description": "ICL, good morning! Good morning, my name is George Parson. I’m looking for one of your employees, Philip Carlquist from Engsboda. Let me see, Filip Karlkvist you said ... no, I’m sorry I can’t find anybody here with that name. I’ll just look up the location, ... Ängsboda ..."
+}
+</script></body>
+</html>

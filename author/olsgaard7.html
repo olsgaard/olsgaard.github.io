@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard &ndash; Posts by: Olsgaard</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/iteration-count-in-python.html#iteration-count-in-python">Iteration count in python</a></h1>
+    <p>
+      Posted on Sun 01 December 2013 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>This is a quite nifty "trick" in Python. Often times you want to iterate an object (array or list, or something else) and you want to use each item you iterate over while keeping count of how many iterations you've been through. The <code>enumerate()</code> function does this!</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">datapoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datapoints</span><span class="p">):</span>
+   <span class="o">....</span><span class="p">:</span>     <span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data</span> <span class="o">==</span> <span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+   <span class="o">....</span><span class="p">:</span>     
+<span class="mi">0</span>     <span class="p">[</span><span class="mi">9</span> <span class="mi">8</span> <span class="mi">4</span> <span class="mi">1</span><span class="p">]</span>    <span class="p">[</span><span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span><span class="p">]</span>
+<span class="mi">1</span>     <span class="p">[</span><span class="mi">2</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mi">1</span><span class="p">]</span>    <span class="p">[</span><span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span><span class="p">]</span>
+<span class="mi">2</span>     <span class="p">[</span><span class="mi">1</span> <span class="mi">9</span> <span class="mi">8</span> <span class="mi">1</span><span class="p">]</span>    <span class="p">[</span><span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span><span class="p">]</span>
+<span class="mi">3</span>     <span class="p">[</span><span class="mi">5</span> <span class="mi">5</span> <span class="mi">0</span> <span class="mi">4</span><span class="p">]</span>    <span class="p">[</span><span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span> <span class="bp">False</span><span class="p">]</span>
+</pre></div>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/hidden-markov-model.html#hidden-markov-model">Hidden Markov Model</a></h1>
+    <p>
+      Posted on Tue 26 November 2013 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <h2>Bayes theorem / understanding conditional probability P(A|B)</h2>
+<ul>
+<li><a href="https://www.khanacademy.org/math/probability/independent-dependent-probability/old_prob_videos/v/probability--part-6">https://www.khanacademy.org/math/probability/independent-dependent-probability/old_prob_videos/v/probability&#8211;part-6</a></li>
+<li><a href="https://www.khanacademy.org/math/probability/independent-dependent-probability/old_prob_videos/v/probability--part-7">https://www.khanacademy.org/math/probability/independent-dependent-probability/old_prob_videos/v/probability&#8211;part-7</a></li>
+<li><a href="https://www.khanacademy.org/math/probability/independent-dependent-probability/old_prob_videos/v/probability--part-8">https://www.khanacademy.org/math/probability/independent-dependent-probability/old_prob_videos/v/probability&#8211;part-8</a></li>
+</ul>
+<p>And two newer videoes show the usage</p>
+<ul>
+<li><a href="https://www.khanacademy.org/math/probability/probability-and-combinatorics-topic/probability_combinatorics/v/conditional-probability-and-combinations">https://www.khanacademy.org/math/probability/probability-and-combinatorics-topic/probability_combinatorics/v/conditional-probability-and-combinations</a></li>
+<li><a href="https://www.khanacademy.org/math/probability/probability-and-combinatorics-topic/probability_combinatorics/v/bayes-theorem-visualized">https://www.khanacademy.org/math/probability/probability-and-combinatorics-topic/probability_combinatorics/v/bayes-theorem-visualized</a></li>
+</ul>
+<h2>Hidden Markov Model</h2>
+<ul>
+<li><a href="http://www.youtube.com/watch?v=98TARXun1xA">http://www.youtube.com/watch?v=98TARXun1xA</a></li>
+</ul>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn float-right" href="/author/olsgaard6.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

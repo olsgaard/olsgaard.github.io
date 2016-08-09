@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="This is a really smart trick if you are developing using iPython Notebooks. What you do is open a REPL that is connected to the notebook you are working on (think of it as an ipython instance that shares the functions and variables with your notebook). This is great as ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Connect iPython REPL to an existing notebook"/>
+<meta property="og:description" content="This is a really smart trick if you are developing using iPython Notebooks. What you do is open a REPL that is connected to the notebook you are working on (think of it as an ipython instance that shares the functions and variables with your notebook). This is great as ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/connect-ipython-repl-to-an-existing-notebook.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-05-06 06:41:36+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Connect iPython REPL to an existing notebook</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="connect-ipython-repl-to-an-existing-notebook">Connect iPython REPL to an existing notebook</h1>
+    <p>Posted on Wed 06 May 2015 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>This is a really smart trick if you are developing using iPython Notebooks. What you do is open a REPL that is connected to the notebook you are working on (think of it as an ipython instance that shares the functions and variables with your notebook).</p>
+<p>This is great as a scratch pad, easy checking of variables and for doing long print statements that would otherwise bog down a browser.</p>
+<p>Simply run the following command from the terminal after opening the notebook server:</p>
+<div class="highlight"><pre><span></span>$ ipython console --existing
+</pre></div>
+
+
+<p>In recent versions of Anaconda, I get a <em>very</em> long error-message that ends with:</p>
+<div class="highlight"><pre><span></span>ImportError: No module named <span class="s1">&#39;jupyter_console&#39;</span>
+</pre></div>
+
+
+<p>To fix this, simply install jupyter_console using pip from the terminal, like so:</p>
+<div class="highlight"><pre><span></span>$ pip install jupyter_console
+</pre></div>
+
+
+<p>I have no idea why this isn't installed by default with Anaconda.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Connect iPython REPL to an existing notebook",
+  "headline": "Connect iPython REPL to an existing notebook",
+  "datePublished": "2015-05-06 06:41:36+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/connect-ipython-repl-to-an-existing-notebook.html",
+  "description": "This is a really smart trick if you are developing using iPython Notebooks. What you do is open a REPL that is connected to the notebook you are working on (think of it as an ipython instance that shares the functions and variables with your notebook). This is great as ..."
+}
+</script></body>
+</html>

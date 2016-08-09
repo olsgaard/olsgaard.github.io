@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+    <meta name="author" content="Mads Olsgaard" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Olsgaard"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Olsgaard</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1><a href="/installing-mecab-on-osx.html#installing-mecab-on-osx">Installing MeCab on OSX</a></h1>
+    <p>
+      Posted on Thu 08 October 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>In the <a href="http://taku910.github.io/mecab/">In the</a> there are only instruction on how to install on Windows and Linux, but not for OSX, despite the program working quite nicely on Mac.</p>
+<p>Kousei Ikeda has easy to follow instruction on his <a href="http://ikekou.jp/blog/archives/2736">Ikekou blog</a> reprinted here in English.</p>
+<h2>MeCab</h2>
+<p>We install from the Terminal, using the following commands:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/Downloads
+$ curl -O https://mecab.googlecode.com/files/mecab-0.996.tar.gz
+$ tar zxfv mecab-0.996.tar.gz
+$ <span class="nb">cd</span> mecab-0.996
+$ ./configure
+$ make
+$ make check
+</pre></div>
+
+
+<p>This downloads the source from Google Code, unpacks it and compile and check compilation.</p>
+<h2>IPADIC</h2>
+<p>Next we need to install a dictionary file / language model for MeCab. The recommended model is IPADIC.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ~/Downloads
+$ $ curl -O https://mecab.googlecode.com/files/mecab-ipadic-2.7.0-20070801.tar.gz
+$ tar zxfv mecab-ipadic-2.7.0-20070801.tar.gz
+$ <span class="nb">cd</span> mecab-ipadic-2.7.0-20070801
+$ ./configure --with-charset<span class="o">=</span>utf8
+$ make
+$ sudo make install
+</pre></div>
+
+
+<p>This downloads the source code, unpacks it and compiles the dictionary using UTF-8 character encoding.</p>
+<p>Note that the above code downloads from googlecode.com, which is deprecated. The project is inaccessible from Google code and is currently hosted on Github (<a href="https://github.com/taku910/mecab">here</a>) so it is uncertain how long the zipped source will be available there.</p>
+<p>Check the <a href="http://taku910.github.io/mecab/#download">download section of the documentation</a> for links to the currently newest version of both IPADIC and MeCab.</p>
+<p>After this is done you can use pip to install MeCab bindings for python like this:</p>
+<div class="highlight"><pre><span></span>$ pip install mecab-python3
+</pre></div>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/evolutionary-algorithms.html#evolutionary-algorithms">Evolutionary algorithms</a></h1>
+    <p>
+      Posted on Thu 28 May 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <h2>Terms:</h2>
+<ul>
+<li><strong>Evolutionary Algorithm (EA)</strong></li>
+<li><strong>Population:</strong> Collection of string of symbols. In case of fooling an image classifier, the <em>population</em> is the list of images used throughout the test.</li>
+<li><strong>Chromosomes:</strong> Each string (or image) in the <em>population</em> is called a <em>chromosome</em>.</li>
+<li><strong>Initial population:</strong> This is our starting point. All <em>chromosomes</em> in the <em>initial population</em> are randomly (or heuristically) generated.</li>
+<li>
+<p><strong>Fitness:</strong> Each <em>chromosome</em> has a <em>fitness</em> value attached to it. <em>Fitness</em> is determined by our fitness function. For [## Terms:</p>
+</li>
+<li>
+<p><strong>Evolutionary Algorithm (EA)</strong></p>
+</li>
+<li><strong>Population:</strong> Collection of string of symbols. In case of fooling an image classifier, the <em>population</em> is the list of images used throughout the test.</li>
+<li><strong>Chromosomes:</strong> Each string (or image) in the <em>population</em> is called a <em>chromosome</em>.</li>
+<li><strong>Initial population:</strong> This is our starting point. All <em>chromosomes</em> in the <em>initial population</em> are randomly (or heuristically) generated.</li>
+<li><strong>Fitness:</strong> Each <em>chromosome</em> has a <em>fitness</em> value attached to it. <em>Fitness</em> is determined by our fitness function. For](https://en.wikipedia.org/wiki/Travelling_salesman_problem "Traveling Salesman problem on Wikipedia") it is the total length travelled for a particular route (or chromosome). When fooling image classifiers, the fitness is the confidence the classifier deems a chromosome is part of a particular class.</li>
+<li><strong>Evaluation:</strong> <em>Evaluating</em> a <em>chromosome</em> is simply determining its <em>fitness</em> value.</li>
+<li><strong>Selection:</strong> The <em>EA</em> chooses the <em>chromosomes</em> with highest <em>fitness</em> following some rule (top 100, or everything above a threshold)</li>
+<li><strong>Parent:</strong> A <em>parent</em> is simply a <em>chromosome</em> that has been selected. From parents we generate <em>offsprings</em>.</li>
+<li><strong>Offspring:</strong> The <em>EA</em> will generate new <em>chromosome</em> from the selections. This can be done in several ways: <ul>
+<li><strong>Crossover / recombination</strong>: generating new chromosomes by recombining two or more parents</li>
+<li><strong>Mutation</strong>: generating offsprings by modifying a single parent, typically in some random way.</li>
+</ul>
+</li>
+</ul>
+<p><a href="http://web.stcloudstate.edu/bajulstrom/aboutEC.html">http://web.stcloudstate.edu/bajulstrom/aboutEC.html</a></p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/extracting-tables-from-a-regular-html-document-using-regex.html#extracting-tables-from-a-regular-html-document-using-regex">Extracting tables from a regular HTML document using regex</a></h1>
+    <p>
+      Posted on Sun 10 May 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>If you know the structure of your html is regular, it may sometimes be easier to do a quick and dirty regex extraction job, than firing up beautiful soup.</p>
+<p>The main limitation of using regex is that we cannot properly parse nested tags. If we are searching for opening and closing `If you know the structure of your html is regular, it may sometimes be easier to do a quick and dirty regex extraction job, than firing up beautiful soup.</p>
+<p>The main limitation of using regex is that we cannot properly parse nested tags. If we are searching for opening and closing` tags, and somewhere we have:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+    ....
+
+  <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>The result will be a disappointing:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+    ....
+
+  <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>So in order for this to work, we have to be confident that there are no nested tags that we are trying to extract.</p>
+<p>In python we can build the pattern and extract the tables like this:</p>
+<div class="highlight"><pre><span></span><span class="nv">pattern</span> <span class="o">=</span> re.compile<span class="o">(</span>r<span class="s1">&#39;&amp;lt;table.*?\/table&gt;&#39;</span>, re.DOTALL<span class="o">)</span>
+
+with open<span class="o">(</span><span class="s2">&quot;document.html&quot;</span>, <span class="s1">&#39;r&#39;</span><span class="o">)</span> as infile:
+    <span class="nv">html</span> <span class="o">=</span> infile.read<span class="o">()</span>
+    <span class="nv">tables</span> <span class="o">=</span> pattern.findall<span class="o">(</span>html<span class="o">)</span>
+</pre></div>
+
+
+<p>The <code>&lt;a href="https://docs.python.org/3.4/library/re.html#re.DOTALL"&gt;re.DOTALL&lt;/a&gt;</code> ensures that <code>.</code> matches <code>\newlines</code>, which we need since the tables span multiple lines.<br />
+if we only used <code>.<em></code> instead of <code>.</em>?</code> to match the content within table tags, the closing tag would be included in the <code>.*</code> part of the pattern and the pattern would match the entire document.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/connect-ipython-repl-to-an-existing-notebook.html#connect-ipython-repl-to-an-existing-notebook">Connect iPython REPL to an existing notebook</a></h1>
+    <p>
+      Posted on Wed 06 May 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>This is a really smart trick if you are developing using iPython Notebooks. What you do is open a REPL that is connected to the notebook you are working on (think of it as an ipython instance that shares the functions and variables with your notebook).</p>
+<p>This is great as a scratch pad, easy checking of variables and for doing long print statements that would otherwise bog down a browser.</p>
+<p>Simply run the following command from the terminal after opening the notebook server:</p>
+<div class="highlight"><pre><span></span>$ ipython console --existing
+</pre></div>
+
+
+<p>In recent versions of Anaconda, I get a <em>very</em> long error-message that ends with:</p>
+<div class="highlight"><pre><span></span>ImportError: No module named <span class="s1">&#39;jupyter_console&#39;</span>
+</pre></div>
+
+
+<p>To fix this, simply install jupyter_console using pip from the terminal, like so:</p>
+<div class="highlight"><pre><span></span>$ pip install jupyter_console
+</pre></div>
+
+
+<p>I have no idea why this isn't installed by default with Anaconda.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h1><a href="/quote-on-color-vs-colour.html#quote-on-color-vs-colour">Quote on Color vs. Colour</a></h1>
+    <p>
+      Posted on Thu 26 March 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <blockquote>
+<p>COLOUR and COLOR are phonetically similar and have the same meaning. COLOUR, COLLAR and CARLA are phonetically similar but differ in meaning. Yet meaning is determined by context. We might COLLAR in a picture, using bright KILLERS; or buy a CARLA for our dog.</p>
+<p>Context assists with meaningful interpretation of what has been said or read, and we happily substitute &#8216;preferred forms' for words or 'concepts' we consider to be in error. Utter the words out of context however, and many variant spellings may be offered in return. This is particularly true of names; for example CAREL, CARRELL, CARROL, CURRALL, CURRELL, KAREEL, KAREL, KAROL and KARIEL.</p>
+<p>The word 'phonetic' refers to spoken sounds and not to the spelling of words. Different spelling sequences often represent similar sounds; for example, the 'PH' in PHONE is similar to the 'F' in FOAM. What are defined as vowels and consonants in the written alphabet are not consistent with spoken language, and are unlikely to be since language is continually changing (the written form taking longer to change than the spoken). The longer documents and records are accumulated, the harder it becomes to justify changing those alphabets.</p>
+</blockquote>
+<p style="text-align: right;">
+  T.N. Gadd. <a href="http://www.emeraldinsight.com/doi/abs/10.1108/eb046999"><em>Fisching Fore Werds</em></a>, 1988
+</p>
+
+<p>I was very impressed with this concise explanation on phonetics and homonyms made by Gadd when he first introduced his Phonix improvement to the Soundex algorithm for phonetic retrieval of names.</p>
+<p>Check out my implementation of Phonix.</p>
+<ul>
+<li><a href="http://olsgaard.dk/notes/wp-content/uploads/2015/03/Phonix_implementation.html">View as Ipython notebook in your browser: Phonix_implementation.html</a></li>
+</ul>
+<p>Or:</p>
+<ul>
+<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/Phonix_implementation.ipynb" title="Right-click &gt; Download, to save the iPython Notebook">Download the iPython notebook and play with the algorithm yourself.</a></li>
+<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/phonix.py" title="Right-click &gt; Download, to save the python script">Download the python script and use it in a project</a></li>
+</ul>
+<p>Or</p>
+<ul>
+<li><a href="https://github.com/olsgaard/phonetic_search" title="Github repository">Fork it on Github!</a></li>
+</ul>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn" href="/index4.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
+    <a class="btn float-right" href="/index2.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

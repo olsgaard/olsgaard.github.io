@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="When working with NLP on a wide variety of text, one is bound to encounter various encoding trouble. Even when everything is revolving around unicode, things are not as straightforward as one could hope. Here's an example of some trouble with a series of files named by a string ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Some notes on unicode and UTF-8 and its various representations"/>
+<meta property="og:description" content="When working with NLP on a wide variety of text, one is bound to encounter various encoding trouble. Even when everything is revolving around unicode, things are not as straightforward as one could hope. Here's an example of some trouble with a series of files named by a string ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/some-notes-on-unicode-and-utf-8-and-its-various-representations.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2014-11-13 12:25:04+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Some notes on unicode and UTF-8 and its various representations</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="some-notes-on-unicode-and-utf-8-and-its-various-representations">Some notes on unicode and UTF-8 and its various representations</h1>
+    <p>Posted on Thu 13 November 2014 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>When working with NLP on a wide variety of text, one is bound to encounter various encoding trouble. Even when everything is revolving around unicode, things are not as straightforward as one could hope.</p>
+<p>Here's an example of some trouble with a series of files named by a string representation of the hexadecimal value of the utf-8 unicode codepoint.</p>
+<p>File names:</p>
+<ul>
+<li>E6B7B1.png</li>
+<li>E6B48B.png</li>
+<li>E6B88B.png</li>
+<li>...</li>
+</ul>
+<p>In my case they look something like this:<figure id="attachment_116" style="width: 545px" class="wp-caption aligncenter"></p>
+<p><a href="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png"><img class="wp-image-116 size-full" src="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png" alt="Stroke order diagram for 母" width="545" height="109" srcset="http://olsgaard.dk/notes/wp-content/uploads/2014/11/母.png 545w, http://olsgaard.dk/notes/wp-content/uploads/2014/11/母-300x60.png 300w" sizes="(max-width: 545px) 100vw, 545px" /></a><figcaption class="wp-caption-text">Stroke order diagram converted to png from the <a href="https://github.com/KanjiVG/kanjivg/tree/master/kanji" title="KanjiVG on Github">KanjiVG project</a></figcaption></figure> </p>
+<p>The problem is to convert these back into unicode, so it is possible for a human to read what the names actually represent. This is easy to do, but difficult to learn how to.</p>
+<p>The file names are UTF-8 hex, not unicode codepoints. <a href="http://www.joelonsoftware.com/articles/Unicode.html" title="The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)">The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)</a> guide has a nice explanation of what is going on here, the important part being this (emphasis mine):</p>
+<blockquote>
+<p>Thus was invented the brilliant concept of UTF-8. UTF-8 was another system for storing your string of Unicode code points, those magic U+ numbers, in memory using 8 bit bytes. In UTF-8, <strong>every code point from 0-127 is stored in a single byte. Only code points 128 and above are stored using 2, 3, in fact, up to 6 bytes.</strong></p>
+</blockquote>
+<p>So what we are seeing are 3 bytes encoded in hexadecimal that refers to some unicode codepoint (which again refers to an actual character)</p>
+<p>In python we can use the string.decode() function to handle these 2 conversions. First we convert the ascii hex representations into actual hex and then we convert the hex numbers into the unicode codepoint that they refer to.</p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt;&gt; &#39;E6B88B&#39;.decode(&#39;hex&#39;).decode(&#39;utf-8&#39;)
+u&#39;\u6e0b&#39;
+&gt;&gt;&gt; print(u&#39;\u6e0b&#39;)
+渋
+</pre></div>
+
+
+<p>My full script is as follows</p>
+<p>The python script:</p>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">@author: Mads Olsgaard, 2014</span>
+
+<span class="s2">Released under BSD3 License.</span>
+
+<span class="s2">This scripts renames .png files that are named with hexadecimal values into their utf-8 string. Assumes the form of A1E2B3.png</span>
+
+<span class="s2">Thanks to user plaes @ http://stackoverflow.com/a/13358677</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s s-Atom">import</span> <span class="s s-Atom">glob</span><span class="p">,</span> <span class="s s-Atom">os</span><span class="p">,</span> <span class="s s-Atom">shutil</span>
+
+<span class="s s-Atom">basepath</span> <span class="o">=</span> <span class="s s-Atom">&#39;../path_to/hex2utf/&#39;</span> <span class="s s-Atom">#folder</span> <span class="s s-Atom">where</span> <span class="s s-Atom">we</span> <span class="s s-Atom">want</span> <span class="s s-Atom">to</span> <span class="s s-Atom">take</span> <span class="s s-Atom">our</span> <span class="s s-Atom">files</span> <span class="s s-Atom">from</span>
+<span class="s s-Atom">targetpath</span> <span class="o">=</span> <span class="s s-Atom">basepath+&#39;out/&#39;</span> <span class="s s-Atom">#</span> <span class="s s-Atom">path</span> <span class="s s-Atom">to</span> <span class="s s-Atom">where</span> <span class="s s-Atom">we</span> <span class="s s-Atom">want</span> <span class="s s-Atom">to</span> <span class="s s-Atom">store</span> <span class="s s-Atom">the</span> <span class="s s-Atom">renamed</span> <span class="s s-Atom">files</span>
+
+<span class="s s-Atom">pattern</span> <span class="o">=</span> <span class="s s-Atom">&#39;??????.png&#39;</span>     <span class="s s-Atom">#</span> <span class="s s-Atom">pattern</span> <span class="s s-Atom">of</span> <span class="s s-Atom">the</span> <span class="s s-Atom">file</span> <span class="s s-Atom">name</span><span class="p">.</span> <span class="nv">In</span> <span class="s s-Atom">this</span> <span class="s s-Atom">case</span> <span class="s s-Atom">we</span> <span class="s s-Atom">are</span> <span class="s s-Atom">only</span> <span class="s s-Atom">looking</span> <span class="s s-Atom">for</span> <span class="mi">6</span> <span class="s s-Atom">character</span> <span class="s s-Atom">long</span> <span class="s s-Atom">file</span> <span class="s s-Atom">names</span> <span class="s s-Atom">of</span> <span class="s s-Atom">the</span> <span class="s s-Atom">png</span> <span class="s s-Atom">type</span><span class="p">.</span>
+                        <span class="s s-Atom">#</span> <span class="nv">These</span> <span class="s s-Atom">are</span> <span class="o">not</span> <span class="s s-Atom">regex</span><span class="p">.</span> <span class="nv">See</span> <span class="nn">https</span><span class="p">:</span><span class="o">//</span><span class="s s-Atom">docs</span><span class="p">.</span><span class="s s-Atom">python</span><span class="p">.</span><span class="s s-Atom">org</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="s s-Atom">library</span><span class="o">/</span><span class="s s-Atom">fnmatch</span><span class="p">.</span><span class="s s-Atom">html</span>
+
+<span class="s s-Atom">filelist</span> <span class="o">=</span> <span class="s s-Atom">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s s-Atom">basepath</span><span class="o">+</span><span class="s s-Atom">pattern</span><span class="p">)</span> <span class="s s-Atom">#load</span> <span class="s s-Atom">all</span> <span class="s s-Atom">files</span> <span class="s s-Atom">in</span> <span class="s s-Atom">basepath</span> <span class="s s-Atom">that</span> <span class="s s-Atom">conform</span> <span class="s s-Atom">to</span> <span class="s s-Atom">pattern</span>
+
+<span class="c1"># Extract the filename from each file path in filelist, truncate the &#39;.png&#39; section</span>
+<span class="c1"># The .decode(&#39;hex&#39;).decode(&#39;utf-8&#39;) part is where the magic happens. First we convert the ASCII string into the hex values it represents</span>
+<span class="c1"># &#39;E6B88B&#39; -&gt; &#39;\xe6\xb8\x8b&#39;</span>
+<span class="c1"># and then we convert the hex-code into the UTF8 unicode character that it represents</span>
+<span class="c1"># &#39;\xe6\xb8\x8b&#39; -&gt; u&#39;\u6e0b&#39;, which in unicode aware applications will show up as &#39;渋&#39;</span>
+
+<span class="s s-Atom">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s s-Atom">os</span><span class="p">.</span><span class="s s-Atom">path</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="s s-Atom">n</span><span class="p">)[:-</span><span class="mi">4</span><span class="p">].</span><span class="nf">decode</span><span class="p">(</span><span class="s s-Atom">&#39;hex&#39;</span><span class="p">).</span><span class="nf">decode</span><span class="p">(</span><span class="s s-Atom">&#39;utf-8&#39;</span><span class="p">)</span> <span class="s s-Atom">for</span> <span class="s s-Atom">n</span> <span class="s s-Atom">in</span> <span class="s s-Atom">filelist</span><span class="p">]</span>
+
+<span class="s s-Atom">for</span> <span class="s s-Atom">n</span><span class="p">,</span><span class="s s-Atom">t</span> <span class="s s-Atom">in</span> <span class="nf">zip</span><span class="p">(</span><span class="s s-Atom">filelist</span><span class="p">,</span> <span class="s s-Atom">filenames</span><span class="p">)</span><span class="s s-Atom">:</span>
+    <span class="s s-Atom">shutil</span><span class="p">.</span><span class="nf">copy2</span><span class="p">(</span><span class="s s-Atom">n</span><span class="p">,</span> <span class="s s-Atom">targetpath</span><span class="o">+</span><span class="s s-Atom">t+&#39;.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Some other links worth looking at</p>
+<ul>
+<li><a href="https://docs.python.org/3/howto/unicode.html" title="Unicode HOWTO">Python's Unicode HOWTO</a></li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Some notes on unicode and UTF-8 and its various representations",
+  "headline": "Some notes on unicode and UTF-8 and its various representations",
+  "datePublished": "2014-11-13 12:25:04+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/some-notes-on-unicode-and-utf-8-and-its-various-representations.html",
+  "description": "When working with NLP on a wide variety of text, one is bound to encounter various encoding trouble. Even when everything is revolving around unicode, things are not as straightforward as one could hope. Here's an example of some trouble with a series of files named by a string ..."
+}
+</script></body>
+</html>

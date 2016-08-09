@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/default.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+
+<meta name="author" content="Olsgaard" />
+<meta name="description" content="When developing a project in JuPyther/Ipython notebook it is often nice to run some test code in a console, especially if you want to check the content of a variable that might have thousands of items – something that might choke your notebook. Open your notebook as you'd normally ..." />
+<meta name="keywords" content="">
+<meta property="og:site_name" content="Olsgaard"/>
+<meta property="og:title" content="Running JuPyther notebook with connected qt console and styles"/>
+<meta property="og:description" content="When developing a project in JuPyther/Ipython notebook it is often nice to run some test code in a console, especially if you want to check the content of a variable that might have thousands of items – something that might choke your notebook. Open your notebook as you'd normally ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/running-jupyther-notebook-with-connected-qt-console-and-styles.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-01-12 11:31:52+00:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/olsgaard.html">
+<meta property="article:section" content="Notes"/>
+<meta property="og:image" content="">
+  <title>Olsgaard &ndash; Running JuPyther notebook with connected qt console and styles</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="/">
+
+        <img src="/theme/img/profile.png" alt="Ølsgaard" title="Ølsgaard">
+
+      </a>
+      <h1><a href="/">Ølsgaard</a></h1>
+<p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
+        <ul class="list">
+          <li><a href="/pages/about-me.html#about-me">About me</a></li>
+          <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/madsolsgaard" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-github" href="https://github.com/olsgaard" target="_blank"><i class="fa fa-github"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="">Home</a>
+      <a href="/archives.html">Archives</a>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="running-jupyther-notebook-with-connected-qt-console-and-styles">Running JuPyther notebook with connected qt console and styles</h1>
+    <p>Posted on Tue 12 January 2016 in <a href="/category/notes.html">Notes</a></p>
+  </header>
+  <div>
+    <p>When developing a project in JuPyther/Ipython notebook it is often nice to run some test code in a console, especially if you want to check the content of a variable that might have thousands of items &#8211; something that might choke your notebook.</p>
+<p>Open your notebook as you'd normally do via a terminal:</p>
+<div class="highlight"><pre><span></span>$ ipython notebook
+</pre></div>
+
+
+<p>In a new terminal window, open a connected qtconsole:</p>
+<div class="highlight"><pre><span></span>$ ipython qtconsole --existing
+</pre></div>
+
+
+<p>Since the default color scheme isn't very nice, I usually choose a style, such as <em>monokai</em></p>
+<div class="highlight"><pre><span></span>$ ipython qtconsole --existing --style<span class="o">=</span>monokai
+</pre></div>
+
+
+<p>By doing this, you can share code between the notebook and the console, as well as draw graphs in both. This is nice for checking the result of a line of code or running a script that prints thousands of lines.</p>
+<p><a href="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49.png" rel="attachment wp-att-208"><img class="aligncenter wp-image-208 size-large" src="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-1024x476.png" alt="qtconsole connected to notebook" width="660" height="307" srcset="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-1024x476.png 1024w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-300x140.png 300w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-768x357.png 768w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49.png 1150w" sizes="(max-width: 660px) 100vw, 660px" /></a></p>
+<p>For a list of styles, run the following code in python:</p>
+<pre>In [1]: from pygments.styles import STYLE_MAP
+In [2]: print (STYLE_MAP.keys())
+Out [2]: dict_keys(['rrt', 'perldoc', 'monokai', 'friendly', 'borland', 'native', 'xcode', 'colorful', 'fruity', 'manni', 'paraiso-light', 'vs', 'emacs', 'bw', 'default', 'murphy', 'igor', 'paraiso-dark', 'trac', 'tango', 'pastie', 'vim', 'autumn'])</pre>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+</article>
+
+    <footer>
+        <p>&copy; Mads Olsgaard </p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Olsgaard ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Running JuPyther notebook with connected qt console and styles",
+  "headline": "Running JuPyther notebook with connected qt console and styles",
+  "datePublished": "2016-01-12 11:31:52+00:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "Olsgaard",
+    "url": "/author/olsgaard.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "/running-jupyther-notebook-with-connected-qt-console-and-styles.html",
+  "description": "When developing a project in JuPyther/Ipython notebook it is often nice to run some test code in a console, especially if you want to check the content of a variable that might have thousands of items – something that might choke your notebook. Open your notebook as you'd normally ..."
+}
+</script></body>
+</html>
