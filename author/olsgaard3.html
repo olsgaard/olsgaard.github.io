@@ -59,6 +59,39 @@
 
 <article>
   <header>
+    <h1><a href="/running-jupyther-notebook-with-connected-qt-console-and-styles.html#running-jupyther-notebook-with-connected-qt-console-and-styles">Running JuPyther notebook with connected qt console and styles</a></h1>
+    <p>
+      Posted on Tue 12 January 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>When developing a project in JuPyther/Ipython notebook it is often nice to run some test code in a console, especially if you want to check the content of a variable that might have thousands of items &#8211; something that might choke your notebook.</p>
+<p>Open your notebook as you'd normally do via a terminal:</p>
+<div class="highlight"><pre><span></span>$ ipython notebook
+</pre></div>
+
+
+<p>In a new terminal window, open a connected qtconsole:</p>
+<div class="highlight"><pre><span></span>$ ipython qtconsole --existing
+</pre></div>
+
+
+<p>Since the default color scheme isn't very nice, I usually choose a style, such as <em>monokai</em></p>
+<div class="highlight"><pre><span></span>$ ipython qtconsole --existing --style<span class="o">=</span>monokai
+</pre></div>
+
+
+<p>By doing this, you can share code between the notebook and the console, as well as draw graphs in both. This is nice for checking the result of a line of code or running a script that prints thousands of lines.</p>
+<p><a href="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49.png" rel="attachment wp-att-208"><img class="aligncenter wp-image-208 size-large" src="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-1024x476.png" alt="qtconsole connected to notebook" width="660" height="307" srcset="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-1024x476.png 1024w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-300x140.png 300w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-768x357.png 768w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49.png 1150w" sizes="(max-width: 660px) 100vw, 660px" /></a></p>
+<p>For a list of styles, run the following code in python:</p>
+<pre>In [1]: from pygments.styles import STYLE_MAP
+In [2]: print (STYLE_MAP.keys())
+Out [2]: dict_keys(['rrt', 'perldoc', 'monokai', 'friendly', 'borland', 'native', 'xcode', 'colorful', 'fruity', 'manni', 'paraiso-light', 'vs', 'emacs', 'bw', 'default', 'murphy', 'igor', 'paraiso-dark', 'trac', 'tango', 'pastie', 'vim', 'autumn'])</pre>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h1><a href="/installing-mecab-on-osx.html#installing-mecab-on-osx">Installing MeCab on OSX</a></h1>
     <p>
       Posted on Thu 08 October 2015 in <a href="/category/notes.html">Notes</a>
@@ -209,40 +242,6 @@ if we only used <code>.<em></code> instead of <code>.</em>?</code> to match the 
 
 
 <p>I have no idea why this isn't installed by default with Anaconda.</p>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h1><a href="/quote-on-color-vs-colour.html#quote-on-color-vs-colour">Quote on Color vs. Colour</a></h1>
-    <p>
-      Posted on Thu 26 March 2015 in <a href="/category/notes.html">Notes</a>
-    </p>
-  </header>
-  <div>
-    <blockquote>
-<p>COLOUR and COLOR are phonetically similar and have the same meaning. COLOUR, COLLAR and CARLA are phonetically similar but differ in meaning. Yet meaning is determined by context. We might COLLAR in a picture, using bright KILLERS; or buy a CARLA for our dog.</p>
-<p>Context assists with meaningful interpretation of what has been said or read, and we happily substitute &#8216;preferred forms' for words or 'concepts' we consider to be in error. Utter the words out of context however, and many variant spellings may be offered in return. This is particularly true of names; for example CAREL, CARRELL, CARROL, CURRALL, CURRELL, KAREEL, KAREL, KAROL and KARIEL.</p>
-<p>The word 'phonetic' refers to spoken sounds and not to the spelling of words. Different spelling sequences often represent similar sounds; for example, the 'PH' in PHONE is similar to the 'F' in FOAM. What are defined as vowels and consonants in the written alphabet are not consistent with spoken language, and are unlikely to be since language is continually changing (the written form taking longer to change than the spoken). The longer documents and records are accumulated, the harder it becomes to justify changing those alphabets.</p>
-</blockquote>
-<p style="text-align: right;">
-  T.N. Gadd. <a href="http://www.emeraldinsight.com/doi/abs/10.1108/eb046999"><em>Fisching Fore Werds</em></a>, 1988
-</p>
-
-<p>I was very impressed with this concise explanation on phonetics and homonyms made by Gadd when he first introduced his Phonix improvement to the Soundex algorithm for phonetic retrieval of names.</p>
-<p>Check out my implementation of Phonix.</p>
-<ul>
-<li><a href="http://olsgaard.dk/notes/wp-content/uploads/2015/03/Phonix_implementation.html">View as Ipython notebook in your browser: Phonix_implementation.html</a></li>
-</ul>
-<p>Or:</p>
-<ul>
-<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/Phonix_implementation.ipynb" title="Right-click &gt; Download, to save the iPython Notebook">Download the iPython notebook and play with the algorithm yourself.</a></li>
-<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/phonix.py" title="Right-click &gt; Download, to save the python script">Download the python script and use it in a project</a></li>
-</ul>
-<p>Or</p>
-<ul>
-<li><a href="https://github.com/olsgaard/phonetic_search" title="Github repository">Fork it on Github!</a></li>
-</ul>
   </div>
 </article>
 

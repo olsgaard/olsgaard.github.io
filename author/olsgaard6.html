@@ -59,6 +59,42 @@
 
 <article>
   <header>
+    <h1><a href="/frequentist-vs-bayesian.html#frequentist-vs-bayesian">Frequentist vs. Bayesian</a></h1>
+    <p>
+      Posted on Sun 13 April 2014 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>Was reading <a href="http://idiom.ucsd.edu/~rlevy/pmsl_textbook/book_draft.pdf">Roger Levy – Probabilistic Models in the Study of Language draft</a> when I got an actual introduction to the words <em>frequentist</em> and  <em>bayesian</em> for the first time. It had never daunted on me that there are these two fundamentally different ways of viewing probability and it has been on my mind ever since.</p>
+<p>Here's the relevant quote:</p>
+<blockquote>
+<p>You and your friend meet at the park for a game of tennis. In order to determine who will serve ﬁrst, you jointly decide to ﬂip a coin. Your friend produces a quarter and tells you that it is a fair coin. What exactly does your friend mean by this?</p>
+<p>A translation of your friend’s statement into the language of probability theory would be that the tossing of the coin is an experiment—a repeatable procedure whose outcome may be uncertain—in which the probability of the coin landing with heads face up is equal to the probability of it landing with tails face up, at 1/2.</p>
+<p>In mathematical notation we would express this translation as P(Heads) = P(Tails) = 1/2.</p>
+<p>This mathematical translation is a partial answer to the question of what probabilities are.</p>
+<p>The translation is not, however, a complete answer to the question of what your friend means, until we give a semantics to statements of probability theory that allows them to be interpreted as pertaining to facts about the world. This is the philosophical problem posed by probability theory.</p>
+<p>Two major classes of answer have been given to this philosophical problem, corresponding to two major schools of thought in the application of probability theory to real problems in the world.</p>
+<p>One school of thought, the frequentist school, considers the probability of an event to denote its limiting, or asymptotic, frequency over an arbitrarily large number of repeated trials. For a frequentist, to say that P(Heads) = 1/2 means that if you were to toss the coin many, many times, the proportion of Heads outcomes would be guaranteed to eventually approach 50%.</p>
+<p>The second, Bayesian school of thought considers the probability of an event E to be a principled measure of the strength of one’s belief that E will result. For a Bayesian, to say that P(Heads) for a fair coin is 0.5 (and thus equal to P(Tails)) is to say that you believe that Heads and Tails are equally likely outcomes if you ﬂip the coin. A popular and slightly more precise variant of Bayesian philosophy frames the interpretation of probabilities in terms of rational betting behavior, deﬁning the probability π that someone ascribes to an event as the maximum amount of money they would be willing to pay for a bet that pays one unit of money. For a fair coin, a rational better would be willing to pay no more than ﬁfty cents for a bet that pays $1 if the coin comes out heads.</p>
+<p>... Fortunately, for the cases in which it makes sense to talk about both reasonable belief and asymptotic frequency, it’s been proven that the two schools of thought lead to the same rules of probability.</p>
+</blockquote>
+<p>I'm having a hard time understanding the Bayesian argument here. The only reason you would want to bet $ 0.49 to win $1 in a 50/50 bet, is if you are able to repeat the bet for a large number of times. Else you are standing to loose $0.49 - and what if that was actually a lof of money to you? In this sense, the idea of betting "no more than fifty cents", is the frequentist idea, that when repeating the bet many times, your winnings will converge to zero or higher.</p>
+<p>However, Levy further refers to a paper by <a href="http://jimbeck.caltech.edu/summerlectures/references/ProbabilityFrequencyReasonableExpectation.pdf" title=" Probability, Frequency and Reasonable Expectation">Cox (1946)</a> which comes with a great counter point to the frequentist view of the world.</p>
+<blockquote>
+<p>... there are probabilities in the sense of reasonable expectation [Bayesian] for which no ensemble exists</p>
+</blockquote>
+<p>Here ensemble are all the drawings from a random distribution - or in the former case a lot of coin tosses. Cox continues:</p>
+<blockquote>
+<p>Thus when the probability is calculated that more than one planetary system exists in the universe, it is barely tenable even as an artifice that this refers to the number of universes, all resembling in some way the universe, which by definition is all-inclusive.</p>
+</blockquote>
+<p>And this is where I feel a paradox starting to creep in. Of course we can make probabilities about situations that cannot be repeated. But on the other hand: If I throw a coin and it turn out heads, wasn't that throw in retrospect certainly a head?</p>
+<p>Does it make sense to talk about the probability of a single, actual outcome, since that outcome is certainly what it was?</p>
+<p>I suppose the answer is, if the world is deterministic, then the frequentist theory of probability doesn't make sense: A coin toss is not 50/50 random outcome. It is an event for which we have insufficient knowledge about to properly predict. And so a bayesien would say: "Given my insufficient knowledge, what should I bet on, and how much?"</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h1><a href="/linear-seperator-perceptron-svm.html#linear-seperator-perceptron-svm">Linear seperator, Perceptron, SVM</a></h1>
     <p>
       Posted on Thu 13 February 2014 in <a href="/category/notes.html">Notes</a>
@@ -201,49 +237,6 @@
 <span class="c1"># func a</span>
 <span class="c1"># func b</span>
 </pre></div>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h1><a href="/finding-coordinates-in-a-picture.html#finding-coordinates-in-a-picture">Finding coordinates in a picture</a></h1>
-    <p>
-      Posted on Sun 01 December 2013 in <a href="/category/notes.html">Notes</a>
-    </p>
-  </header>
-  <div>
-    <p>This is a very handy one liner I found in <a href="http://programmingcomputervision.com/" title="Programming Computer Vision Book">Programming Computer Vision</a>, that can give you the coordinates of non-black pixels in an image.</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">a</span><span class="p">[</span><span class="n">a</span><span class="o">&gt;</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="n">a</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">27</span><span class="p">]:</span> 
-<span class="n">array</span><span class="p">([[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="n">coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">nonzero</span><span class="p">())</span><span class="o">.</span><span class="n">T</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="n">coord</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span> 
-<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
-</pre></div>
-
-
-<p>It's the <code>np.array(a.nonzero()).T</code> where the magic happens.</p>
-<ul>
-<li><a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.nonzero.html#numpy.nonzero">array.nonzero()</a></li>
-</ul>
   </div>
 </article>
 

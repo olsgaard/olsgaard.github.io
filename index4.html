@@ -59,6 +59,40 @@
 
 <article>
   <header>
+    <h1><a href="/quote-on-color-vs-colour.html#quote-on-color-vs-colour">Quote on Color vs. Colour</a></h1>
+    <p>
+      Posted on Thu 26 March 2015 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <blockquote>
+<p>COLOUR and COLOR are phonetically similar and have the same meaning. COLOUR, COLLAR and CARLA are phonetically similar but differ in meaning. Yet meaning is determined by context. We might COLLAR in a picture, using bright KILLERS; or buy a CARLA for our dog.</p>
+<p>Context assists with meaningful interpretation of what has been said or read, and we happily substitute &#8216;preferred forms' for words or 'concepts' we consider to be in error. Utter the words out of context however, and many variant spellings may be offered in return. This is particularly true of names; for example CAREL, CARRELL, CARROL, CURRALL, CURRELL, KAREEL, KAREL, KAROL and KARIEL.</p>
+<p>The word 'phonetic' refers to spoken sounds and not to the spelling of words. Different spelling sequences often represent similar sounds; for example, the 'PH' in PHONE is similar to the 'F' in FOAM. What are defined as vowels and consonants in the written alphabet are not consistent with spoken language, and are unlikely to be since language is continually changing (the written form taking longer to change than the spoken). The longer documents and records are accumulated, the harder it becomes to justify changing those alphabets.</p>
+</blockquote>
+<p style="text-align: right;">
+  T.N. Gadd. <a href="http://www.emeraldinsight.com/doi/abs/10.1108/eb046999"><em>Fisching Fore Werds</em></a>, 1988
+</p>
+
+<p>I was very impressed with this concise explanation on phonetics and homonyms made by Gadd when he first introduced his Phonix improvement to the Soundex algorithm for phonetic retrieval of names.</p>
+<p>Check out my implementation of Phonix.</p>
+<ul>
+<li><a href="http://olsgaard.dk/notes/wp-content/uploads/2015/03/Phonix_implementation.html">View as Ipython notebook in your browser: Phonix_implementation.html</a></li>
+</ul>
+<p>Or:</p>
+<ul>
+<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/Phonix_implementation.ipynb" title="Right-click &gt; Download, to save the iPython Notebook">Download the iPython notebook and play with the algorithm yourself.</a></li>
+<li><a href="https://github.com/olsgaard/phonetic_search/raw/master/phonix.py" title="Right-click &gt; Download, to save the python script">Download the python script and use it in a project</a></li>
+</ul>
+<p>Or</p>
+<ul>
+<li><a href="https://github.com/olsgaard/phonetic_search" title="Github repository">Fork it on Github!</a></li>
+</ul>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h1><a href="/phonixpy-phonetic-name-search-in-python.html#phonixpy-phonetic-name-search-in-python">'Phonix.py &#8211; phonetic name search in Python'</a></h1>
     <p>
       Posted on Tue 24 March 2015 in <a href="/category/notes.html">Notes</a>
@@ -190,23 +224,6 @@
 <p style="text-align: right;">
   <a href="https://en.wikipedia.org/wiki/Trevor_Hastie">Trevor Hastie</a> from his "Dimensionality and structured models" lecture in his <a href="https://class.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about">Statistical Learning</a> course at Stanford.
 </p>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h1><a href="/algorithms-sensitivity-to-single-salient-dimension.html#algorithms-sensitivity-to-single-salient-dimension">Algorithms sensitivity to single salient dimension</a></h1>
-    <p>
-      Posted on Fri 23 January 2015 in <a href="/category/notes.html">Notes</a>
-    </p>
-  </header>
-  <div>
-    <p>I was doing a <em>voice activity detection</em> algorithm and testing my implementation on speech data recorded in a silent room. My first feature was a simple energy level detector, basically giving a number to how high volume each frame of sound contains. Since there was no noise on the recordings, the mere presence of volume explained 93% of the results.</p>
-<p>I decided to ad frequencies to the feature vector. Given that each frame is 80 miliseconds, this makes it possible to calculate the energy of some 40 distinct frequencies. I'd expect the few coughs and breathings that were mistaken as speech to have a different frequency profile and be cut out using this larger dataset. To my surprise, my nearest neighbour classifier improved with a few percentage points, while my SVM plummeted with over 20 points accuracy.</p>
-<p>I realize that the saliency of these ~40 new points are very low, compared to energy-datapoint, but I honestly still expected the SVM to figure this out. And i expected the NN to be much weaker against such an increase in dimensions.</p>
-<p>Puzzled, I decided to conduct an experiment looking at how different classifiers handle additional low-saliency dimensions. In this setup only one dimension is salient, but it will how ever completely explain the data. Meanwhile all other dimensions are completely random noise.</p>
-<p><img alt="" src="assets/2015/01/index.png" /></p>
-<p>You can <a href="http://olsgaard.dk/notes/wp-content/uploads/other_files/Sensitivity_to_single_salient_dimension.ipynb" title="Sensitivity to single salient dimension ipython notebook">download the ipython notebook</a> or <a href="http://nbviewer.ipython.org/url/olsgaard.dk/notes/wp-content/uploads/other_files/Sensitivity_to_single_salient_dimension.ipynb" title="View online in nbviewer">read it online</a>. (warning, the code is <em>very</em> stateful and uses global variables, so be sure to execute things in order)</p>
   </div>
 </article>
 

@@ -59,6 +59,60 @@
 
 <article>
   <header>
+    <h1><a href="/fix-valueerror-unknown-locale-utf-8-under-mac-os-x.html#fix-valueerror-unknown-locale-utf-8-under-mac-os-x">Fix "ValueError: unknown locale: UTF-8" under Mac OS X'</a></h1>
+    <p>
+      Posted on Mon 04 April 2016 in <a href="/category/notes.html">Notes</a>
+    </p>
+  </header>
+  <div>
+    <p>This is a problem I've been having after switching from OSX' default bash to oh-my-zsh.</p>
+<p>When importing things like <code>matplotlib</code> in Python I get the following error:</p>
+<div class="highlight"><pre><span></span><span class="n">ValueError</span><span class="o">:</span> <span class="n">unknown</span> <span class="n">locale</span><span class="o">:</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span>
+</pre></div>
+
+
+<p>The problem is that the locale has not been set and UTF-8 is not a valid locale, as it is only an encoding.</p>
+<p>In bash or zsh run</p>
+<div class="highlight"><pre><span></span>$ locale
+</pre></div>
+
+
+<p>if it looks like</p>
+<div class="highlight"><pre><span></span><span class="nv">LANG</span><span class="o">=</span>
+<span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_MONETARY</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_TIME</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<span class="nv">LC_ALL</span><span class="o">=</span>
+</pre></div>
+
+
+<p>You are in trouble. You want it to look something like the following if you are using US locale</p>
+<div class="highlight"><pre><span></span><span class="nv">LANG</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_CTYPE</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_MONETARY</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_NUMERIC</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_TIME</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nv">LC_ALL</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+</pre></div>
+
+
+<p>If you browse around the web for a solution you will be told to add</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+<span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+</pre></div>
+
+
+<p>To all sorts of places. <code>~/.bash</code>, <code>~/.profile</code>, <code>/etc/.profile</code> and the list goes on. If you are running oh-my-zsh you need to edit <code>~/.zshrc</code> and add the above two lines and restart you terminal and python as well.</p>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h1><a href="/installing-tensorflow-in-python-35-with-anaconda.html#installing-tensorflow-in-python-35-with-anaconda">Installing Tensorflow in Python 3.5 with Anaconda</a></h1>
     <p>
       Posted on Fri 29 January 2016 in <a href="/category/notes.html">Notes</a>
@@ -164,39 +218,6 @@ $ ipython kernel install
 <li><code>mv "{}".utf8 "{}"</code> move the new file to the old filename, thus overwriting the original file</li>
 <li><code>\;</code> close the second -exec command.</li>
 </ul>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h1><a href="/running-jupyther-notebook-with-connected-qt-console-and-styles.html#running-jupyther-notebook-with-connected-qt-console-and-styles">Running JuPyther notebook with connected qt console and styles</a></h1>
-    <p>
-      Posted on Tue 12 January 2016 in <a href="/category/notes.html">Notes</a>
-    </p>
-  </header>
-  <div>
-    <p>When developing a project in JuPyther/Ipython notebook it is often nice to run some test code in a console, especially if you want to check the content of a variable that might have thousands of items &#8211; something that might choke your notebook.</p>
-<p>Open your notebook as you'd normally do via a terminal:</p>
-<div class="highlight"><pre><span></span>$ ipython notebook
-</pre></div>
-
-
-<p>In a new terminal window, open a connected qtconsole:</p>
-<div class="highlight"><pre><span></span>$ ipython qtconsole --existing
-</pre></div>
-
-
-<p>Since the default color scheme isn't very nice, I usually choose a style, such as <em>monokai</em></p>
-<div class="highlight"><pre><span></span>$ ipython qtconsole --existing --style<span class="o">=</span>monokai
-</pre></div>
-
-
-<p>By doing this, you can share code between the notebook and the console, as well as draw graphs in both. This is nice for checking the result of a line of code or running a script that prints thousands of lines.</p>
-<p><a href="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49.png" rel="attachment wp-att-208"><img class="aligncenter wp-image-208 size-large" src="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-1024x476.png" alt="qtconsole connected to notebook" width="660" height="307" srcset="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-1024x476.png 1024w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-300x140.png 300w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49-768x357.png 768w, http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-12-at-12.20.49.png 1150w" sizes="(max-width: 660px) 100vw, 660px" /></a></p>
-<p>For a list of styles, run the following code in python:</p>
-<pre>In [1]: from pygments.styles import STYLE_MAP
-In [2]: print (STYLE_MAP.keys())
-Out [2]: dict_keys(['rrt', 'perldoc', 'monokai', 'friendly', 'borland', 'native', 'xcode', 'colorful', 'fruity', 'manni', 'paraiso-light', 'vs', 'emacs', 'bw', 'default', 'murphy', 'igor', 'paraiso-dark', 'trac', 'tango', 'pastie', 'vim', 'autumn'])</pre>
   </div>
 </article>
 
