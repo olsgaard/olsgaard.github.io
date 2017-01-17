@@ -5866,7 +5866,7 @@ u&#39;\u6e0b&#39;
 <p>Let $W$ be a set of words ${w_1, w_2 ... w_n}$ in a sentence (in the above example W would be ご飯を食べます). $P(W)$ is the probability that this sentence exists in the language. In practice that is, how many times does this exact sentence show up in our training data. Since very few sentences show up in written language more than once, the chance that we will deal with a sentence that does not exist in our training set is quite high. Therefore we tend to let $W$ be a collection of uni, bi, and trigrams and their associated frequenzy. $P(W)$ is also known as our <a href="http://en.wikipedia.org/wiki/Language_model">language model</a>.</p>
 <p>Let $A$ be a string of phonetic characters &#8211; or kana &#8211; so that $A = {a_1, a_2 ... a_m}$.</p>
 <p>Now we want to find the most probable string $W$ associated with the input string $A$.</p>
-<p>A classic example is きしゃのきしゃがきしゃのきしゃできしゃした which we typically want to <a href="assets/2014/11/240px-IlkhanidHorseArcher.jpg"></a>be 貴社の記者が貴社の汽車で帰社した (Your reporter was sent home in your train). Given that all the nouns in the phrase is pronounced きしゃ(kisha) this leads to a large variety of more or less meaningful, but still possible sentences. The reporter could be sent home in the reporters own train, or the train could be sent home on the reporter. The reporter or train could even be involved in <a href="http://ja.wikipedia.org/wiki/%E9%A8%8E%E5%B0%84">mounted archery</a> (騎射 also read きしゃ) if one is imaginative enough. However entertaining that may be, it is the job of our kana-kanji converter to convert to the most likely sentence, not the most entertaining.</p>
+<p>A classic example is きしゃのきしゃがきしゃのきしゃできしゃした which we typically want to <a href="assets/2014/11/240px-IlkhanidHorseArcher.jpg">Picture of mounted archery "きしゃ"</a>be 貴社の記者が貴社の汽車で帰社した (Your reporter was sent home in your train). Given that all the nouns in the phrase is pronounced きしゃ(kisha) this leads to a large variety of more or less meaningful, but still possible sentences. The reporter could be sent home in the reporters own train, or the train could be sent home on the reporter. The reporter or train could even be involved in <a href="http://ja.wikipedia.org/wiki/%E9%A8%8E%E5%B0%84">mounted archery</a> (騎射 also read きしゃ) if one is imaginative enough. However entertaining that may be, it is the job of our kana-kanji converter to convert to the most likely sentence, not the most entertaining.</p>
 <p>Using Bayes theorem we can ask <em>What is the probability of an observed kana string A, given a sentence W?</em></p>
 <p>$$P(W|A) = \frac{P(A|W)P(W)}{P(A)} $$</p>
 <p style="text-align: right;">
@@ -5926,7 +5926,6 @@ u&#39;\u6e0b&#39;
 </pre></div>
 
 
-<hr />
 <p>If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs that in one way or another includes Japanese characters.</p>
 <p>Below is a graph showing Zipf's Law for the distribution of characters used in [TL;DR: <em>Install Japanese language support and insert the following in your python script</em></p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
@@ -5934,11 +5933,12 @@ u&#39;\u6e0b&#39;
 </pre></div>
 
 
-<hr />
 <p>If you are working with any kind of NLP in Python that involves Japanese, it is paramount to be able to view summary statics in the form of graphs that in one way or another includes Japanese characters.</p>
 <p>Below is a graph showing Zipf's Law for the distribution of characters used in](http://en.wikipedia.org/wiki/Tetsuko_Kuroyanagi) &#8216;Totto Channel', the sequel to her famous <a href="en.wikipedia.org/wiki/Totto-Chan:_The_Little_Girl_at_the_Window">&#8220;Totto Chan: The little girl by the window&#8221;</a>.<figure id="attachment_68" style="width: 300px" class="wp-caption aligncenter"></p>
-<p><img alt="" src="assets/2014/10/tottochannel_nojap-300x225.png" /></p>
-<p>Character Distribution of 100 most used characters - but which ones?</figcaption></p>
+<hr />
+<p><img alt="Character Distribution of 100 most used characters - but which ones?" src="assets/2014/10/tottochannel_nojap-300x225.png" /></p>
+<p><em>Character Distribution of 100 most used characters - but which ones?</em></p>
+<hr />
 <p>On most systems, Matplotlib will not be able to display Japanese characters out-of-the-box and this is a big problem as the graph above is completely useless for even the most basic investigation.</p>
 <p>I've tested on OSX, Windows 8 and Ubuntu and only OSX manages to work out of the box, despite my Windows installation being Japanese!</p>
 <p><a href="http://stackoverflow.com/questions/10960463/non-ascii-characters-in-matplotlib">Most</a> <a href="http://stackoverflow.com/questions/2406700/accented-characters-in-matplotlib">advice</a> online will tell you to change the font used by Matplotlib, but if you are on Ubuntu it might not be completely obvious which font you need to use! Moreover there are many ways to change the font.</p>
@@ -6003,7 +6003,7 @@ DejaVu Sans /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
 </pre>
 
 <p>As you can see, I'm running Anaconda Python 3, and if Anaconda can't find a font it will fallback into it's own folder to load the Vera font.</p>
-<p><img alt="" src="assets/2014/10/fontcheck.png" /></p>
+<p><img alt="Font check" src="assets/2014/10/fontcheck.png" /></p>
 <p>Surprisingly, Droid does support Japanese, it just saves the Japanese character space in a seperate font file, rendering it useless for this purpose. However, the Takao font family does work for our purpose.</p>
 <p>Takao fonts should be installed by default if you have set your location somewhere in Japan during installation of Ubuntu or if you have installed support for Japanese language in <em>System Settings</em> → <em>Language Support</em> (just hit the super key and search for language). I recommend this, since this will also <a href="http://moritzmolch.com/1453">install the Japanese input method</a>, <a href="http://en.wikipedia.org/wiki/Anthy">Anthy</a></p>
 <p>You can also use apt-get, like this from the command line (not tested):</p>
@@ -6011,7 +6011,7 @@ DejaVu Sans /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
 </pre>
 
 <p>And now we can finally see which characters Kuronayagi used the most for her sequel:</p>
-<p><img alt="" src="assets/2014/10/tottochannel_wjap-1024x348.png" /></p>
+<p><img alt="Character Distribution of 100 most used characters" src="assets/2014/10/tottochannel_wjap-1024x348.png" /></p>
 <p>And apparently, that's the Japanese comma, also called <a href="http://ja.wikipedia.org/wiki/%E8%AA%AD%E7%82%B9">読点</a></p>
   </div>
 </article>
