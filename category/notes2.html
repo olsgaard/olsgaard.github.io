@@ -41,6 +41,9 @@
       <h1><a href="/">Ølsgaard</a></h1>
 <p>My notes related to NLP, ML and other niceties in life.</p>      <nav>
         <ul class="list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/archives.html">Archives</a></li>
+          
           <li><a href="/pages/about-me.html#about-me">About me</a></li>
           <li><a href="https://github.com/olsgaard/" target="_blank">Fork me on github</a></li>
         </ul>
@@ -52,10 +55,7 @@
     </div>
   </aside>
   <main>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/archives.html">Archives</a>
-    </nav>
+
 
 <article>
   <header>
@@ -67,7 +67,7 @@
   <div>
     <p><img alt="Notebook showing several available python kernels" src="http://olsgaard.dk/notes/wp-content/uploads/2016/01/Screen-Shot-2016-01-29-at-16.46.50.png" /></p>
 <p>To get Jupyter notebooks to use several different Python kernels using Anaconda, so the following from the commandline:</p>
-<div class="highlight"><pre><span></span>$ conda create -n py27 anaconda <span class="nv">python</span><span class="o">=</span>2.7 
+<div class="highlight"><pre><span></span>$ conda create -n py27 anaconda <span class="nv">python</span><span class="o">=</span><span class="m">2</span>.7 
 $ <span class="nb">source</span> activate py27 
 $ conda install notebook ipykernel
 $ ipython kernel install
